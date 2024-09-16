@@ -18,9 +18,11 @@ session_start();
     <?php
       require("../base/main_menu.php");
     ?>
-        <div class="container   my-5">
+        <div class="container   my-1">
 
-
+             
+              <a href="add.php" class="btn btn-success my-5">Add</a>
+            
             <table class="table table-bordered">
                 <thead>
                     <th>#</th>
