@@ -28,8 +28,27 @@ session_start();
                     <th>#</th>
                     <th>Name</th>
                     <th>Location</th>
-                    <th><input type="checkbox" class="form-check-input"/></th>
+                    <th><input type="checkbox" class="form-check-input" value="all"/></th>
                 </thead>
+                <tbody>
+                  <?php
+                    include '../base/config.php';
+                    $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
+                    $stmt = $conn->prepare("SELECT id, name, location  FROM warehouse");
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+                    while ($row = $result->fetch_assoc()) 
+                    {     
+                      echo '<tr>
+                                 <td>'.$row["id"].'</td>
+                                 <td>'.$row["name"].'</td>
+                                 <td>'.$row["location"].'</td>
+                                 <td><input type="checkbox" class="form-check-input" value="'.$row["id"].'"/></td>
+                           </tr>
+                      ';
+                    }
+                  ?>
+                </tbody>
             </table>
 
         </div>
