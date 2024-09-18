@@ -83,9 +83,12 @@ $product_table_sql = "CREATE TABLE IF NOT EXISTS products (
     sale_price DECIMAL(10, 2)  NULL,
     stock INT  NULL,
     location VARCHAR(255)  NULL,
+    image    VARCHAR(600)  NULL,
     warehouse_id INT NOT NULL,
+    created_by_id INT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (warehouse_id) REFERENCES warehouse(id)
+    FOREIGN KEY (warehouse_id) REFERENCES warehouse(id),
+    FOREIGN KEY (created_by_id) REFERENCES users(id)
 )";
 if ($conn->query($product_table_sql) === TRUE) {
     echo "Table 'products' created successfully<br>";

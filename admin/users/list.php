@@ -1,5 +1,12 @@
 <?php 
 session_start();
+// Restrict access to superadmin or admin users only
+if($_SESSION['role'] != "superadmin" && $_SESSION['role'] != "admin")
+{
+    // If the user is not an admin or superadmin, redirect or deny access
+    echo "<div class='alert alert-danger text-center'>You are not authorized to view users!</div>";
+    exit();  // Stop the script to prevent unauthorized access
+}
 ?>
 
 
