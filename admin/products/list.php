@@ -21,9 +21,9 @@ session_start();
         <div class="container   my-1">
 
              
-              <a href="add.php" class="btn btn-success my-5">Add</a>
+              <a href="add.php" class="btn btn-success my-5 ">Add</a>
             
-            <table class="table table-bordered">
+            <table class="table table-bordered ">
                 <thead>
                     <th>#</th>
                     <th>Image</th>
