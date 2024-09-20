@@ -85,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                     <tr>
                         <td>role</td>
                         <td>
-                            <select name="role" class="form-control">
+                            <select name="role" class="select-control">
                                 <option>user</option>
                                 <option>admin</option>
                                 <option>superadmin</option>
@@ -95,7 +95,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
                     <tr>
                         <td>password</td>
-                        <td><input type="password" name="password" placeholder="password" class="form-control form-control-lg" required/>
+                        <td>
+                            <input type="password" name="password" placeholder="password" class="form-control form-control-lg" required/>
+                        </td>
+
                     </tr>
 
                     <tr>
@@ -109,5 +112,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         </div>
 
         <script src="../../static/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script>
+            let currentPage = document.getElementById("users_btn");
+            currentPage.classList.add("active");
+        </script>
     </body>
 </html>

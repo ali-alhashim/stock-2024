@@ -76,7 +76,8 @@ if ($conn->query($user_table_sql) === TRUE) {
 // Create 'products' table
 $product_table_sql = "CREATE TABLE IF NOT EXISTS products (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
+    barcode VARCHAR(255) NULL,
+    name VARCHAR(255)  NULL,
     description VARCHAR(500)  NULL,
     manufacture VARCHAR(255)  NULL,
     cost_price DECIMAL(10, 2)  NULL,

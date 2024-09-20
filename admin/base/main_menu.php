@@ -24,18 +24,18 @@ if (!isset($_SESSION['user_id'])) {
         if($_SESSION['role'] == "superadmin")
         {
            echo ' <li class="nav-item">
-                   <a class="btn btn-outline-primary mx-2" href="..\users\list.php">Users</a>
+                   <a class="btn btn-outline-primary mx-2" href="..\users\list.php" id="users_btn">Users</a>
                 </li>';
         }
         ?>
 
                 <li class="nav-item">
-                   <a class="btn btn-outline-primary mx-2" href="..\warehouses\list.php">Warehouses</a>
+                   <a class="btn btn-outline-primary mx-2" href="..\warehouses\list.php" id="warehouses_btn">Warehouses</a>
                 </li>
 
 
                 <li class="nav-item">
-                   <a class="btn btn-outline-primary mx-2" href="..\products\list.php">Products</a>
+                   <a class="btn btn-outline-primary mx-2" href="..\products\list.php" id="products_btn">Products</a>
                 </li>
       
       

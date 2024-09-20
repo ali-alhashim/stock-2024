@@ -86,5 +86,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         </div>
 
         <script src="../../static/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script>
+            let currentPage = document.getElementById("warehouses_btn");
+            currentPage.classList.add("active");
+        </script>
     </body>
 </html>

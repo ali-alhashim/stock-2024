@@ -61,5 +61,9 @@ if($_SESSION['role'] != "superadmin" && $_SESSION['role'] != "admin")
         </div>
 
         <script src="../../static/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script>
+            let currentPage = document.getElementById("users_btn");
+            currentPage.classList.add("active");
+        </script>
     </body>
 </html>

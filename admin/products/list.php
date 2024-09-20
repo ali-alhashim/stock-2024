@@ -20,8 +20,14 @@ session_start();
     ?>
         <div class="container   my-1">
 
-             
-              <a href="add.php" class="btn btn-success my-5 ">Add</a>
+               <div class="row">
+                    <div class="col">
+                        <a href="add.php" class="btn btn-success my-5 ">Add</a>
+                    </div>
+                    <div class="col text-end">
+                        <a href="product_movements.php" class="btn btn-secondary my-5 ">Product Movements</a>
+                    </div>
+                </div>
             
             <table class="table table-bordered ">
                 <thead>
@@ -63,5 +69,9 @@ session_start();
         </div>
 
         <script src="../../static/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script>
+            let currentPage = document.getElementById("products_btn");
+            currentPage.classList.add("active");
+        </script>
     </body>
 </html>
