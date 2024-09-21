@@ -59,9 +59,19 @@ session_start();
                       echo '<tr>
                                  <td>'.$row["id"].'</td>
                                  <td>'.$row["barcode"].'</td>
-                                 <td>'.$row["image"].'</td>
+                                 <td>
+                                 <a href="/static/img/uploads/'.$row["image"].'" target="_blank"><img src="/static/img/uploads/'.$row["image"].'" alt="Product Image" style="max-width:200px"></a>
+                                 </td>
                                  <td>'.$row["name"].'</td>
                                  <td>'.$row["description"].'</td>
+                                 <td>'.$row["manufacture"].'</td>
+                                 <td>'.$row["location"].'</td>
+                                 <td>'.$row["warehouse_id"].'</td>
+                                 <td>'.$row["created_at"].'</td>
+                                 <td>'.$row["created_by_id"].'</td>
+                                 <td>'.$row["stock"].'</td>
+                                 <td>'.$row["cost_price"].'</td>
+                                  <td>'.$row["sale_price"].'</td>
                                  <td><input type="checkbox" class="form-check-input" value="'.$row["id"].'"/></td>
                            </tr>
                       ';
