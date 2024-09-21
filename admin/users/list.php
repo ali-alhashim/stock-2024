@@ -1,4 +1,5 @@
 <?php 
+
 session_start();
 // Restrict access to superadmin or admin users only
 if($_SESSION['role'] != "superadmin" && $_SESSION['role'] != "admin")

@@ -1,4 +1,5 @@
 <?php 
+
 session_start();
 
 // Restrict access to superadmin or admin users only
@@ -15,9 +16,13 @@ if($_SESSION['role'] != "superadmin" && $_SESSION['role'] != "admin")
 if ($_SERVER['REQUEST_METHOD'] == 'POST') 
 {
     // Sanitize and receive input
-    $username     = trim($_POST['username']);
-    $password     = trim($_POST['password']);
-    $role         = trim($_POST['role']);
+    $barcode             = trim($_POST['barcode']);
+    $name                = trim($_POST['name']);
+    $description         = trim($_POST['description']);
+    $warehouse           = trim($_POST['warehouse']); //warehouse id
+    $user_id             = $_SESSION['user_id']; // Created by
+    $location            = trim($_POST['location']);
+    $movement_type       = trim($_POST['movement_type']);
 
     // check if the name of the username exist if not insert to DB
     include '../base/config.php';

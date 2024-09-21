@@ -1,5 +1,8 @@
 <?php
 // Start session
+ini_set('session.hash_function', 'sha256');
+ini_set('session.sid_length', 64);  // 256 characters long
+
 session_start();
 
 // Include the config file with database credentials
