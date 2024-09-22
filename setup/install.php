@@ -95,10 +95,31 @@ if(file_exists('../admin/base/config.php'))
                 password VARCHAR(255) NOT NULL,
                 role ENUM('admin', 'user', 'superadmin') NOT NULL,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                active BOOLEAN NOT NULL DEFAULT true,
+                is_active BOOLEAN NOT NULL DEFAULT true,
                 mf2_code VARCHAR(255) NULL
             )";
             createTable($conn, $user_table_sql, 'users');
+
+            // Create 'user_logs' table
+            $user_logs_table_sql = "CREATE TABLE IF NOT EXISTS user_logs (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                user_id INT NOT NULL,
+                action VARCHAR(600) NOT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (user_id) REFERENCES users(id)
+            )";
+            createTable($conn, $user_logs_table_sql, 'user_logs');
+
+            // Create ip_blacklist table
+            $ip_blacklist_table_sql = "CREATE TABLE IF NOT EXISTS ip_blacklist (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                ip_address VARCHAR(255) NOT NULL,
+                is_banned BOOLEAN NOT NULL DEFAULT true,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )";
+            createTable($conn, $ip_blacklist_table_sql, 'ip_blacklist');
+
+
 
             // Create 'product_category' table
             $product_category_table_sql = "CREATE TABLE IF NOT EXISTS product_category (
