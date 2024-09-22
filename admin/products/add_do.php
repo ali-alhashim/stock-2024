@@ -16,12 +16,14 @@ require_once '../base/config.php';
 session_start();
 if (!isset($_SESSION['role']) || ($_SESSION['role'] != "superadmin" && $_SESSION['role'] != "admin")) {
     echo '<script>
-                Swal.fire({
-                    title: "Oops",
-                    text: "You are not authorized to add Product!",
-                    icon: "error"
-                });
-           </script>';
+        Swal.fire({
+            title: "Oops",
+            text: "You are not authorized to add Product!",
+            icon: "error"
+        }).then(() => {
+            window.location.href = "../../index.php";
+        });
+      </script>';
     exit();  // Stop the script to prevent unauthorized access
 }
 
@@ -85,14 +87,36 @@ function addUpdateProduct($data, $imageFileName) {
             // If image is provided, update stock and image
             $stmt = $conn->prepare("UPDATE products SET stock = ?, image = ? WHERE barcode = ?");
             $stmt->bind_param("iss", $newStock, $imageFileName, $data['barcode']);
+
+            
         } else {
             // If no image, only update stock
             $stmt = $conn->prepare("UPDATE products SET stock = ? WHERE barcode = ?");
             $stmt->bind_param("is", $newStock, $data['barcode']);
+            
         }
 
         if ($stmt->execute()) {
+            
+            $stmt->close();
+            // Prepare the SQL statement to get the product ID using the barcode
+            $stmt3 = $conn->prepare("SELECT id FROM products WHERE barcode = ?");
+            $stmt3->bind_param("s", $data['barcode']);  // Bind the barcode parameter
+            $stmt3->execute();  // Execute the query
+            $stmt3->bind_result($product_id);  // Bind the result to $product_id
+            $stmt3->fetch();  // Fetch the result
+            $stmt3->close();  // Close the statement
+
+            // add to product_movements table
+            
+
+            $stmt2 = $conn->prepare("INSERT INTO product_movements(product_id, user_id, movement_type, quantity) VALUES (?,?,?,?)");
+            $stmt2->bind_param("iisi", $product_id, $_SESSION['user_id'], $data['movement_type'], $data['stock']);
+            $stmt2->execute();
+            $stmt2->close();
+
             return array('message' => 'Stock updated successfully!');
+
         } else {
             return array('error' => 'Error: Could not update stock!');
         }
@@ -105,15 +129,38 @@ function addUpdateProduct($data, $imageFileName) {
         if ($imageFileName) {
             $stmt = $conn->prepare("INSERT INTO products (barcode, name, description, manufacture, warehouse_id, created_by_id, location, stock, image, cost_price, sale_price) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             $stmt->bind_param("ssssiisisss", $data['barcode'], $data['name'], $data['description'], $data['manufacture'], $data['warehouse'], $_SESSION['user_id'], $data['location'], $data['stock'], $imageFileName, $data['cost_price'], $data['sale_price']);
+
+           
+
         } else {
             // If no image is provided, insert null for the image field
             $stmt = $conn->prepare("INSERT INTO products (barcode, name, description, manufacture, warehouse_id, created_by_id, location, stock, image, cost_price, sale_price) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NULL, ?, ?)");
             $stmt->bind_param("ssssiisiss", $data['barcode'], $data['name'], $data['description'], $data['manufacture'], $data['warehouse'], $_SESSION['user_id'], $data['location'], $data['stock'], $data['cost_price'], $data['sale_price']);
+
+            
         }
 
-        if ($stmt->execute()) {
+        if ($stmt->execute()) 
+        {
+            $stmt->close();
+             // add to product_movements table
+             // Prepare the SQL statement to get the product ID using the barcode
+            $stmt3 = $conn->prepare("SELECT id FROM products WHERE barcode = ?");
+            $stmt3->bind_param("s", $data['barcode']);  // Bind the barcode parameter
+            $stmt3->execute();  // Execute the query
+            $stmt3->bind_result($product_id);  // Bind the result to $product_id
+            $stmt3->fetch();  // Fetch the result
+            $stmt3->close();  // Close the statement
+            
+            // add to product_movements table
+            $stmt2 = $conn->prepare("INSERT INTO product_movements(product_id, user_id, movement_type, quantity) VALUES (?,?,?,?)");
+            $stmt2->bind_param("iisi", $product_id, $_SESSION['user_id'], $data['movement_type'], $data['stock']);
+            $stmt2->execute();
+            $stmt2->close();
             return array('message' => 'Product added successfully!');
-        } else {
+        } 
+        else 
+        {
             return array('error' => 'Error: Could not add product!');
         }
     }
@@ -131,6 +178,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         'manufacture' => trim($_POST['manufacture']),
         'warehouse' => trim($_POST['warehouse']),
         'location' => trim($_POST['location']),
+        'movement_type'=>trim($_POST['movement_type']),
         'stock' => (int) trim($_POST['stock']),
         'cost_price' => (float) trim($_POST['cost_price']),
         'sale_price' => (float) trim($_POST['sale_price']),
@@ -176,7 +224,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             title: "Success",
                             text: "' . $result['message'] . '",
                             icon: "success"
-                        });
+                         }).then(() => {
+                        window.location.href = "list.php";
+                    });
                       </script>';
             }
         }

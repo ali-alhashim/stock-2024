@@ -22,13 +22,14 @@ if (!isset($_SESSION['role']) || ($_SESSION['role'] != "superadmin" && $_SESSION
     
 
     echo '<script>
-                Swal.fire({
-                    title: "Oops",
-                    text: "You are not authorized to add Product!",
-                    icon: "error"
-                });
-        
-                </script>';
+    Swal.fire({
+        title: "Oops",
+        text: "You are not authorized to add Product!",
+        icon: "error"
+    }).then(() => {
+        window.location.href = "../../index.php";
+    });
+  </script>';
 
     
    exit();  // Stop the script to prevent unauthorized access

@@ -51,7 +51,12 @@ session_start();
                   <?php
                     include '../base/config.php';
                     $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
-                    $stmt = $conn->prepare("SELECT id,barcode, image, name, description, manufacture, location, warehouse_id, created_at, created_by_id, stock, cost_price, sale_price  FROM products");
+                    $stmt = $conn->prepare("
+                                             SELECT PRODUCTS.*, USERS.username, WAREHOUSE.name as warehouse_name
+                                              FROM products AS PRODUCTS
+                                              JOIN users AS USERS ON PRODUCTS.created_by_id = USERS.id
+                                              JOIN warehouse as WAREHOUSE ON PRODUCTS.warehouse_id = WAREHOUSE.id
+                                          ");
                     $stmt->execute();
                     $result = $stmt->get_result();
                     while ($row = $result->fetch_assoc()) 
@@ -66,9 +71,9 @@ session_start();
                                  <td>'.$row["description"].'</td>
                                  <td>'.$row["manufacture"].'</td>
                                  <td>'.$row["location"].'</td>
-                                 <td>'.$row["warehouse_id"].'</td>
+                                 <td>'.$row["warehouse_name"].'</td>
                                  <td>'.$row["created_at"].'</td>
-                                 <td>'.$row["created_by_id"].'</td>
+                                 <td>'.$row["username"].'</td>
                                  <td>'.$row["stock"].'</td>
                                  <td>'.$row["cost_price"].'</td>
                                   <td>'.$row["sale_price"].'</td>

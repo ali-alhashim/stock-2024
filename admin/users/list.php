@@ -1,17 +1,3 @@
-<?php 
-
-session_start();
-// Restrict access to superadmin or admin users only
-if($_SESSION['role'] != "superadmin" && $_SESSION['role'] != "admin")
-{
-    // If the user is not an admin or superadmin, redirect or deny access
-    echo "<div class='alert alert-danger text-center'>You are not authorized to view users!</div>";
-    exit();  // Stop the script to prevent unauthorized access
-}
-?>
-
-
-
 
 <!doctype html>
 <html lang="en">
@@ -20,8 +6,34 @@ if($_SESSION['role'] != "superadmin" && $_SESSION['role'] != "admin")
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Users Page</title>
     <link href="../../static/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../../static/sweetalert2/sweetalert2.min.css"rel="stylesheet"/>
+    <script src="../../static/sweetalert2/sweetalert2.all.min.js"></script>
   </head>
     <body>
+
+    <?php 
+
+session_start();
+// Restrict access to superadmin or admin users only
+if($_SESSION['role'] != "superadmin" && $_SESSION['role'] != "admin")
+{
+    // If the user is not an admin or superadmin, redirect or deny access
+  
+
+    echo '<script>
+    Swal.fire({
+        title: "Oops",
+        text: "You are not authorized to view users!",
+        icon: "error"
+    }).then(() => {
+        window.location.href = "../../index.php";
+    });
+  </script>';
+
+    exit();  // Stop the script to prevent unauthorized access
+}
+?>
+
 
     <?php
       require("../base/main_menu.php");
