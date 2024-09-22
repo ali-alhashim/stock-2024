@@ -170,67 +170,72 @@ function addUpdateProduct($data, $imageFileName) {
 }
 
 // Handle form submission
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $data = array(
-        'barcode' => trim($_POST['barcode']),
-        'name' => trim($_POST['name']),
-        'description' => trim($_POST['description']),
-        'manufacture' => trim($_POST['manufacture']),
-        'warehouse' => trim($_POST['warehouse']),
-        'location' => trim($_POST['location']),
-        'movement_type'=>trim($_POST['movement_type']),
-        'stock' => (int) trim($_POST['stock']),
-        'cost_price' => (float) trim($_POST['cost_price']),
-        'sale_price' => (float) trim($_POST['sale_price']),
-    );
-
-    $errors = validateInput($data);
-
-    if (!empty($errors)) {
-        foreach ($errors as $error) {
-            echo '<script>
-                    Swal.fire({
-                        title: "Oops",
-                        text: "' . $error . '",
-                        icon: "error"
-                    });
-                  </script>';
-        }
-    } else {
-        // Handle file upload
-        $fileUploadResult = handleFileUpload($_FILES['image']);
-        if (isset($fileUploadResult['error']) && $fileUploadResult['error'] != 'No image uploaded') {
-            echo '<script>
-                    Swal.fire({
-                        title: "Oops",
-                        text: "' . $fileUploadResult['error'] . '",
-                        icon: "error"
-                    });
-                  </script>';
-        } else {
-            $imageFileName = isset($fileUploadResult['imageFileName']) ? $fileUploadResult['imageFileName'] : null;
-            $result = addUpdateProduct($data, $imageFileName);
-            if (isset($result['error'])) {
-                echo '<script>
-                        Swal.fire({
-                            title: "Oops",
-                            text: "' . $result['error'] . '",
-                            icon: "error"
-                        });
-                      </script>';
-            } else {
-                echo '<script>
-                        Swal.fire({
-                            title: "Success",
-                            text: "' . $result['message'] . '",
-                            icon: "success"
-                         }).then(() => {
-                        window.location.href = "list.php";
-                    });
-                      </script>';
-            }
-        }
+if ($_SERVER['REQUEST_METHOD'] == 'POST') 
+{
+    if(isset($_SESSION["csrf_token"]) && $_POST["csrf_token"] == $_SESSION["csrf_token"])
+    {
+                $data = array(
+                    'barcode' => trim($_POST['barcode']),
+                    'name' => trim($_POST['name']),
+                    'description' => trim($_POST['description']),
+                    'manufacture' => trim($_POST['manufacture']),
+                    'warehouse' => trim($_POST['warehouse']),
+                    'location' => trim($_POST['location']),
+                    'movement_type'=>trim($_POST['movement_type']),
+                    'stock' => (int) trim($_POST['stock']),
+                    'cost_price' => (float) trim($_POST['cost_price']),
+                    'sale_price' => (float) trim($_POST['sale_price']),
+                );
+            
+                $errors = validateInput($data);
+            
+                if (!empty($errors)) {
+                    foreach ($errors as $error) {
+                        echo '<script>
+                                Swal.fire({
+                                    title: "Oops",
+                                    text: "' . $error . '",
+                                    icon: "error"
+                                });
+                            </script>';
+                    }
+                } else {
+                    // Handle file upload
+                    $fileUploadResult = handleFileUpload($_FILES['image']);
+                    if (isset($fileUploadResult['error']) && $fileUploadResult['error'] != 'No image uploaded') {
+                        echo '<script>
+                                Swal.fire({
+                                    title: "Oops",
+                                    text: "' . $fileUploadResult['error'] . '",
+                                    icon: "error"
+                                });
+                            </script>';
+                    } else {
+                        $imageFileName = isset($fileUploadResult['imageFileName']) ? $fileUploadResult['imageFileName'] : null;
+                        $result = addUpdateProduct($data, $imageFileName);
+                        if (isset($result['error'])) {
+                            echo '<script>
+                                    Swal.fire({
+                                        title: "Oops",
+                                        text: "' . $result['error'] . '",
+                                        icon: "error"
+                                    });
+                                </script>';
+                        } else {
+                            echo '<script>
+                                    Swal.fire({
+                                        title: "Success",
+                                        text: "' . $result['message'] . '",
+                                        icon: "success"
+                                    }).then(() => {
+                                    window.location.href = "list.php";
+                                });
+                                </script>';
+                        }
+                    }
+                }
     }
+   
 }
 ?>
 

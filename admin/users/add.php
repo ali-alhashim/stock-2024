@@ -1,62 +1,3 @@
-<?php 
-
-session_start();
-
-// Restrict access to superadmin or admin users only
-if($_SESSION['role'] != "superadmin" && $_SESSION['role'] != "admin")
-{
-    // If the user is not an admin or superadmin, redirect or deny access
-    echo "<div class='alert alert-danger text-center'>You are not authorized to add users!</div>";
-    exit();  // Stop the script to prevent unauthorized access
-}
-
-?>
-
-<?php
-if ($_SERVER['REQUEST_METHOD'] == 'POST') 
-{
-    // Sanitize and receive input
-    $username     = trim($_POST['username']);
-    $password     = trim($_POST['password']);
-    $role         = trim($_POST['role']);
-
-    // check if the name of the username exist if not insert to DB
-    include '../base/config.php';
-    $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
-    $stmt = $conn->prepare("SELECT id FROM users WHERE username = ?");
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    $stmt->store_result();
-
-    if ($stmt->num_rows > 0) 
-    {
-        // If username exists, display a message
-        echo "<div class='alert alert-danger text-center'>username with this name already exists!</div>";
-    } 
-    else 
-    {
-        // If not, insert the new user into the database
-        $stmt->close();
-        $hashed_password = password_hash($password, PASSWORD_BCRYPT);  // Secure password hashing
-        $stmt = $conn->prepare("INSERT INTO users (username, password, role) VALUES (?, ?, ?)");
-        $stmt->bind_param("sss", $username,  $hashed_password, $role);
-
-        if ($stmt->execute()) 
-        {
-            echo "<div class='alert alert-success text-center'>user added successfully!</div>";
-        } 
-        else 
-        {
-            echo "<div class='alert alert-danger text-center'>Error: Could not add user!</div>";
-        }
-    }
-
-    $stmt->close();
-    $conn->close();
-}
-?>
-
-
 
 <!doctype html>
 <html lang="en">
@@ -108,6 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                     </tr>
                 </tbody>
             </table>
+             <input type="hidden" name="csrf_token" value="<?=$_SESSION['csrf_token']?>"/>
             </form>
 
         </div>

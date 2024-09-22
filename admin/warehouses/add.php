@@ -1,51 +1,3 @@
-<?php 
-
-session_start();
-?>
-
-<?php
-if ($_SERVER['REQUEST_METHOD'] == 'POST') 
-{
-    // Sanitize and receive input
-    $wh_name     = trim($_POST['wh_name']);
-    $wh_location = trim($_POST['wh_location']);
-
-    // check if the name of the warehouse exist if not insert to DB
-    include '../base/config.php';
-    $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
-    $stmt = $conn->prepare("SELECT id FROM warehouse WHERE name = ?");
-    $stmt->bind_param("s", $wh_name);
-    $stmt->execute();
-    $stmt->store_result();
-
-    if ($stmt->num_rows > 0) 
-    {
-        // If warehouse name exists, display a message
-        echo "<div class='alert alert-danger text-center'>Warehouse with this name already exists!</div>";
-    } 
-    else 
-    {
-        // If not, insert the new warehouse into the database
-        $stmt->close();
-        $stmt = $conn->prepare("INSERT INTO warehouse (name, location) VALUES (?, ?)");
-        $stmt->bind_param("ss", $wh_name, $wh_location);
-
-        if ($stmt->execute()) 
-        {
-            echo "<div class='alert alert-success text-center'>Warehouse added successfully!</div>";
-        } 
-        else 
-        {
-            echo "<div class='alert alert-danger text-center'>Error: Could not add warehouse!</div>";
-        }
-    }
-
-    $stmt->close();
-    $conn->close();
-}
-?>
-
-
 
 <!doctype html>
 <html lang="en">
@@ -58,13 +10,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
     <body>
 
     <?php
+      session_start();
       require("../base/main_menu.php");
     ?>
         <div class="container   my-1">
 
              
              
-            <form method="POST" class="my-5">
+            <form method="POST" class="my-5" action="add_do.php">
             <table class="table table-bordered">
               
                 <tbody>
@@ -82,6 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
                     </tr>
                 </tbody>
             </table>
+            <input type="hidden" name="csrf_token" value="<?=$_SESSION['csrf_token']?>"/>
             </form>
 
         </div>

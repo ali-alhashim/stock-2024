@@ -5,8 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Setup Page</title>
     <link href="../static/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../static/sweetalert2/sweetalert2.min.css"rel="stylesheet"/>
+    <script src="../static/sweetalert2/sweetalert2.all.min.js"></script>
   </head>
   <body style="background-color: #2c2c2c;">
+
+
+  <?php
+  session_start();
+  //check if ../admin/base/config.php exist 
+  // so already installed so to access this page you have to be a superadmin
+  if(file_exists('../admin/base/config.php'))
+  {
+    require_once '../admin/base/config.php';
+    
+    if (!isset($_SESSION['role']) || ($_SESSION['role'] != "superadmin"))
+    {
+      echo '<script>
+                      Swal.fire({
+                          title: "Oops",
+                          text: "You are not authorized to view setup page contact superadmin user!",
+                          icon: "error"
+                      }).then(() => {
+                          window.location.href = "../index.php";
+                      });
+              </script>';
+  
+      exit();  // Stop the script to prevent unauthorized access
+    }
+
+    $setupAlreadyDone = True;
+
+
+  }
+  else
+  {
+    $setupAlreadyDone = False;
+  }
+  ?>
+
+
 <!---->
 <section class="vh-100">
     <div class="container py-5 h-100">
@@ -49,6 +87,20 @@
              
   
               <button  class="btn btn-primary btn-lg btn-block" type="submit">Install</button>
+
+
+            <?php
+            if($setupAlreadyDone)
+            {
+              echo '<input type="hidden" name="csrf_token" value="'.$_SESSION['csrf_token'].'"/>';
+            }
+            else
+            {
+              // this first time so generate temp csrf token
+              $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+              echo '<input type="hidden" name="csrf_token" value="'.$_SESSION['csrf_token'].'"/>';
+            }
+            ?>  
             </form>
               <hr class="my-4">
               <h5>Created By Ali Alhashim</h5>

@@ -109,6 +109,7 @@ if (!isset($_SESSION['role']) || ($_SESSION['role'] != "superadmin" && $_SESSION
                 </tr>
             </tbody>
         </table>
+        <input type="hidden" name="csrf_token" value="<?=$_SESSION['csrf_token']?>"/>
     </form>
 </div>
 

@@ -41,9 +41,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Verify the password
         if (password_verify($password, $user['password'])) {
             // Password is correct, create session
-            $_SESSION['user_id'] = $user['id'];
-            $_SESSION['username'] = $user['username'];
-            $_SESSION['role'] = $user['role'];
+            $_SESSION['user_id']    = $user['id'];
+            $_SESSION['username']   = $user['username'];
+            $_SESSION['role']       = $user['role'];
+            $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); // Generates a secure token
+
 
             // Redirect to a dashboard or home page
             header("Location: admin/dashboard/index.php");
