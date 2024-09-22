@@ -9,13 +9,14 @@
     <script src="../static/sweetalert2/sweetalert2.all.min.js"></script>
 </head>
 <body>
+    <div class="container">
 <?php
 
-
+session_start();
 if(file_exists('../admin/base/config.php'))
   {
     require_once '../admin/base/config.php';
-    session_start();
+    
     if (!isset($_SESSION['role']) || ($_SESSION['role'] != "superadmin"))
     {
       echo '<script>
@@ -175,13 +176,23 @@ if(file_exists('../admin/base/config.php'))
             $file_path = __DIR__ . "../../admin/base/config.php";
             if (file_put_contents($file_path, $config_content)) {
                 echo "Configuration file 'config.php' created successfully.<br>";
+                echo "<a href='../admin/dashboard/index.php'>Dashboard</a>";
             } 
             else 
             {
                 echo "Error creating 'config.php' file";
             }
         }
+        else
+        {
+            echo "Error no CSRF Token";
+        }
+  }
+  else
+  {
+    echo "only post request";
   }
 ?>
+</div>
 </body>
 </html>
