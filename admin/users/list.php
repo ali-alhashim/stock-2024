@@ -40,8 +40,14 @@ if($_SESSION['role'] != "superadmin" && $_SESSION['role'] != "admin")
     ?>
         <div class="container   my-1">
 
-             
-              <a href="add.php" class="btn btn-success my-5">Add</a>
+             <div class="row">
+                <div class="col">
+                  <a href="add.php" class="btn btn-success my-5">Add</a>
+                </div>
+                <div class="col text-end">
+                  <a href="logs.php" class="btn btn-success my-5">Users Logs</a>
+                </div>
+              </div>
             
             <table class="table table-bordered">
                 <thead>

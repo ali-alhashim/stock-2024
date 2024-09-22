@@ -94,7 +94,9 @@ if(file_exists('../admin/base/config.php'))
                 username VARCHAR(50) NOT NULL UNIQUE,
                 password VARCHAR(255) NOT NULL,
                 role ENUM('admin', 'user', 'superadmin') NOT NULL,
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                active BOOLEAN NOT NULL DEFAULT true,
+                mf2_code VARCHAR(255) NULL
             )";
             createTable($conn, $user_table_sql, 'users');
 
