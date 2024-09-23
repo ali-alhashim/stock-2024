@@ -1,0 +1,5 @@
+Options -Indexes
+<FilesMatch "\.(env|git|htaccess|config\.php)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>

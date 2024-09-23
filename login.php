@@ -16,7 +16,7 @@ session_start();
 
 // Include the config file with database credentials
 include 'admin/base/config.php';
-
+include 'admin/base/logs_func.php';
 // Connect to the database
 $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
 
@@ -64,6 +64,22 @@ function blacklist_ip($ip, $conn)
     $stmt->bind_param('s', $ip);
     $stmt->execute();
     $stmt->close();
+}
+
+
+function get_device_type() {
+    $userAgent = $_SERVER['HTTP_USER_AGENT'];
+
+    // Simple mobile detection by checking for common mobile keywords in the User-Agent
+    $mobile_agents = array('iPhone', 'Android', 'webOS', 'BlackBerry', 'iPod', 'Opera Mini', 'Windows Phone');
+
+    foreach ($mobile_agents as $device) {
+        if (stripos($userAgent, $device) !== false) {
+            return 'Mobile';
+        }
+    }
+
+    return 'Computer';
 }
 
 
@@ -127,7 +143,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['username']   = $user['username'];
             $_SESSION['role']       = $user['role'];
             $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); // Generates a secure token
-
+            
+            
+            action_log($user['id'], "Login ".$user['username']." From ".get_client_ip()." Device ".get_device_type(), $conn);
 
             // Redirect to a dashboard or home page
             header("Location: admin/dashboard/index.php");
@@ -136,11 +154,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Invalid password
             echo "Invalid username or password.";
             // Increment failed login attempts
+            action_log(null, "Invalid username ".$_POST['username']." or password From ".get_client_ip()." Device ".get_device_type(), $conn);
             $_SESSION[$failed_login_key]++;
         }
     } else {
         // Invalid username
         echo "Invalid username or password.";
+        action_log(null, "Invalid username ".$_POST['username']." or password From ".get_client_ip()." Device ".get_device_type(), $conn);
         // Increment failed login attempts
         $_SESSION[$failed_login_key]++; 
     }
