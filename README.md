@@ -1,21 +1,21 @@
 # Inventory Managment System [Stock]
 
-> Perform Physical Inventory by using Mobile with QR, Barcode Scanner take photo enter data All data saved in Mysql Database
-> via PHP API
+> Perform physical inventory using a mobile device with a QR code or barcode scanner, 
+>take photos, and enter data. All data is saved in a MySQL database via a PHP API.
+
 
 
 ## Features
-- Multiple Users with simple permissions [user, admin, superadmin]
-- no duplicate  product before we insert new, we check if exist just update IN / OUT
-- Security 5 times login Invalid ip added to blacklist 
-- Security all Forms has CSFR [Cross-site request forgery]
-- Users Logs all actions are logs 
-- .htaccess Dir protected & config.php
-
+- Multiple users with role-based permissions (user, admin, superadmin).
+- No duplicate products: Before inserting a new product, the system checks if it already exists; if it does, the inventory is simply updated (IN/OUT).
+- Security: After 5 invalid login attempts, the IP address is added to the blacklist.
+- All forms are protected against CSRF (Cross-site Request Forgery).
+- User actions are fully logged.
+- Directory protection using .htaccess and config.php.
 
 ## Installation
 
-- you need php 8 , Apache server, Mysql 8
-- delete config.php file from admin/base/config.php
-- in your browser open https://your-server/folder of application / setup/
-- Enter your information and you are ready to go
+- Requirements: PHP 8, Apache server, MySQL 8.
+- Delete the config.php file from admin/base/config.php.
+- In your browser, open https://your-server/folder-of-application/setup/.
+- Enter your information, and you're ready to go.
