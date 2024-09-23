@@ -1,0 +1,7 @@
+# Ignore database files
+*.sql
+*.sqlite
+*.sqlite3
+
+# Ignore Config file
+admin/base/Config.php

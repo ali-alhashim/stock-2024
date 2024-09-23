@@ -11,7 +11,7 @@
 - Security: After 5 invalid login attempts, the IP address is added to the blacklist.
 - All forms are protected against CSRF (Cross-site Request Forgery).
 - User actions are fully logged.
-- Directory protection using .htaccess and config.php.
+- Directory protection using .htaccess.
 
 ## Installation
 
