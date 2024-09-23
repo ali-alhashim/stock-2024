@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Users Page</title>
     <link href="../../static/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../../static/sweetalert2/sweetalert2.min.css"rel="stylesheet"/>
+    <link href="../../static/sweetalert2/sweetalert2.min.css" rel="stylesheet"/>
     <script src="../../static/sweetalert2/sweetalert2.all.min.js"></script>
   </head>
     <body>
