@@ -10,6 +10,8 @@
 <body>
 <?php 
 require_once '../base/config.php';
+include     '../base/logs_func.php';
+
 session_start();
 
 if (!isset($_SESSION['role']) || ($_SESSION['role'] != "superadmin" && $_SESSION['role'] != "admin")) {
@@ -60,7 +62,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
                 if ($stmt->execute()) 
                 {
-                    echo "<div class='alert alert-success text-center'>user added successfully!</div>";
+                    
+                    action_log($_SESSION['user_id'], "Create New User :".$username . " With Role ".$role, $conn);
+
+                    echo '  <script>
+                                Swal.fire({
+                                    title: "Success",
+                                    text: "User added successfully!",
+                                    icon: "success"
+                                }).then(() => {
+                                window.location.href = "list.php";
+                                });
+                             </script>';
+
                 } 
                 else 
                 {

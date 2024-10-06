@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/action_server"
+        android:icon="@android:drawable/ic_lock_idle_charging"
+        android:iconTint="@color/black"
+        android:textColor="@color/black"
+        android:title="Server" />
+
+    <item
+        android:id="@+id/action_add"
+        android:icon="@android:drawable/ic_input_add"
+        android:iconTint="@color/black"
+        android:textColor="@color/black"
+        android:title="Add" />
+
+
+
+    <item
+        android:id="@+id/action_list"
+        android:iconTint="@color/black"
+        android:textColor="@color/black"
+        android:icon="@android:drawable/ic_dialog_dialer"
+        android:title="List" />
+
+</menu>

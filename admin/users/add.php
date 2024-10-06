@@ -10,13 +10,14 @@
     <body>
 
     <?php
+    session_start();
       require("../base/main_menu.php");
     ?>
         <div class="container   my-1">
 
              
              
-            <form method="POST" class="my-5">
+            <form method="POST" class="my-5" action="add_do.php">
             <table class="table table-bordered">
               
                 <tbody>

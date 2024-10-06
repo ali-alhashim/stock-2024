@@ -62,7 +62,7 @@ if($_SESSION['role'] != "superadmin" && $_SESSION['role'] != "admin")
                     include '../base/config.php';
                     
                     $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
-                    $stmt = $conn->prepare("SELECT id, user_id, action,created_at  FROM user_logs");
+                    $stmt = $conn->prepare("SELECT id, user_id, action,created_at  FROM user_logs order by id desc");
                     $stmt->execute();
                     $result = $stmt->get_result();
                     while ($row = $result->fetch_assoc()) 

@@ -52,15 +52,17 @@ if($_SESSION['role'] != "superadmin" && $_SESSION['role'] != "admin")
             <table class="table table-bordered">
                 <thead>
                     <th>#</th>
-                    <th>username</th>
-                    <th>role</th>
+                    <th>Username</th>
+                    <th>Role</th>
+                    <th>Active</th>
+                    <th>MF2</th>
                     <th><input type="checkbox" class="form-check-input" value="all"/></th>
                 </thead>
                 <tbody>
                   <?php
                     include '../base/config.php';
                     $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
-                    $stmt = $conn->prepare("SELECT id, username, role  FROM users");
+                    $stmt = $conn->prepare("SELECT id, username, role, is_active,mf2_code  FROM users");
                     $stmt->execute();
                     $result = $stmt->get_result();
                     while ($row = $result->fetch_assoc()) 
@@ -69,6 +71,8 @@ if($_SESSION['role'] != "superadmin" && $_SESSION['role'] != "admin")
                                  <td>'.$row["id"].'</td>
                                  <td>'.$row["username"].'</td>
                                  <td>'.$row["role"].'</td>
+                                 <td>'.$row["is_active"].'</td>
+                                 <td>'.$row["mf2_code"].'</td>
                                  <td><input type="checkbox" class="form-check-input" value="'.$row["id"].'"/></td>
                            </tr>
                       ';
