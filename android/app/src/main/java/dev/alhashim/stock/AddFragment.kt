@@ -27,6 +27,7 @@ class AddFragment : Fragment() {
     private lateinit var warehousesList: MutableList<String>
     private lateinit var editTextBarcode: EditText
     private  lateinit var editTextName:EditText
+    private lateinit var editTextDescription:EditText
     private val SCAN_BARCODE_REQUEST_CODE = 1001
     private lateinit var progressBar:ProgressBar
 
@@ -40,7 +41,7 @@ class AddFragment : Fragment() {
         val scanBtn: Button = view.findViewById(R.id.scan_btn)
         editTextBarcode = view.findViewById(R.id.editTextBarcode)
         editTextName = view.findViewById(R.id.editTextName)
-        val editTextDescription: EditText = view.findViewById(R.id.editTextDescription)
+        editTextDescription = view.findViewById(R.id.editTextDescription)
         val editTextManufacture: EditText = view.findViewById(R.id.editTextManufacture)
         val spinnerWarehouse: Spinner = view.findViewById(R.id.spinnerWarehouse)
         val editTextLocation: EditText = view.findViewById(R.id.editTextLocation)
@@ -108,29 +109,21 @@ class AddFragment : Fragment() {
         // Scan Action
         scanBtn.setOnClickListener(){
 
-           // val intent = Intent(requireContext(), BarcodeScanningActivity::class.java).apply{
-            //    action = "com.dev.alhashim.stock.SCAN_BARCODE"
-            //}
-           // startActivity(intent)
+            //Clear all text values
+            editTextName.setText("")
+            editTextBarcode.setText("")
+            editTextDescription.setText("")
 
             val intent = Intent(requireContext(), BarcodeScanningActivity::class.java)
             startActivityForResult(intent, SCAN_BARCODE_REQUEST_CODE)
 
-
         } // end scan action
-
-
-
-
 
 
         return view
     }
 
-    /*override fun onBarcodeScanned(barcodeValue: String) {
-        Log.e(TAG,"Barcode passed from activity to add fragment:${barcodeValue}")
-        editTextBarcode.setText(barcodeValue)
-    }*/
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -139,56 +132,68 @@ class AddFragment : Fragment() {
             if (barcodeValue != null) {
                 editTextBarcode.setText(barcodeValue)
 
-                //send get request to server for the item with barcode = barcodeValue
-                val preferences = requireActivity().getSharedPreferences("alhashim-stock", Context.MODE_PRIVATE)
-                var token = preferences.getString("token", "")
-                val savedServerURL = preferences.getString("server", "")
 
-                //-------------send get request for product with barcode
-                // Create Retrofit instance
-
-                val apiGetProductByBarcode = Retrofit.Builder()
-                    .baseUrl(savedServerURL)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build()
-                    .create(ApiServiceProduct::class.java)
-
-                //^^^^^call the api^^^^^^^^^^
-                if(token == null)
-                {
-                    token = "no login !"
-                }
-                apiGetProductByBarcode.getProduct(barcodeValue, token).enqueue(object : Callback<List<ProductDataClass>> {
-                    override fun onResponse(
-                        call: Call<List<ProductDataClass>>,
-                        response: retrofit2.Response<List<ProductDataClass>>
-                    ) {
-                        progressBar.visibility = View.GONE
-
-                        if (response.isSuccessful && response.body() != null) {
-                            Log.d(TAG, "HTTP GET request is successful for Product")
-                            response.body()?.let { products ->
-                                for (product in products) {
-                                    //here only set the result to view
-                                    editTextName.setText(product.name)
-                                }
-
-                            }
-                        } else {
-                            Log.e(TAG, "Failed to load product: ${response.errorBody()?.string()}")
-                            Toast.makeText(requireContext(), "Failed to load products.", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-
-                    override fun onFailure(call: Call<List<ProductDataClass>>, t: Throwable) {
-                        progressBar.visibility = View.GONE
-                        Log.e(TAG, "HTTP GET request failed: ${t.message}")
-                        Toast.makeText(requireContext(), "Error loading warehouses.", Toast.LENGTH_SHORT).show()
-                    }
-                })
                 //^^^^^^^^^^^^^^^^^^^^^^^^^^^
-                //------------------------------------------------------
+                try {
+                    getProduct(barcodeValue)
+                }catch (e: Exception){
+                    Toast.makeText(requireContext(), "Product:${e.toString()}", Toast.LENGTH_SHORT).show()
+                }
+
+                //^^^^^^^^^^^^^^^^^^^^^^^^^^^
             }
         }
+    }// onActivity result
+
+    private fun getProduct(barcodeValue:String){
+        //===============================================
+        //send get request to server for the item with barcode = barcodeValue
+        val preferences = requireActivity().getSharedPreferences("alhashim-stock", Context.MODE_PRIVATE)
+        var token = preferences.getString("token", "")
+        val savedServerURL = preferences.getString("server", "")
+
+        //-------------send get request for product with barcode
+        // Create Retrofit instance
+
+        val apiGetProductByBarcode = Retrofit.Builder()
+            .baseUrl(savedServerURL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(ApiServiceProduct::class.java)
+
+        //^^^^^call the api^^^^^^^^^^
+        if(token == null)
+        {
+            token = "no login !"
+        }
+        apiGetProductByBarcode.getProduct(barcodeValue, token).enqueue(object : Callback<List<ProductDataClass>> {
+            override fun onResponse(
+                call: Call<List<ProductDataClass>>,
+                response: retrofit2.Response<List<ProductDataClass>>
+            ) {
+                progressBar.visibility = View.GONE
+
+                if (response.isSuccessful && response.body() != null) {
+                    Log.d(TAG, "HTTP GET request is successful for Product")
+                    response.body()?.let { products ->
+                        for (product in products) {
+                            //here only set the result to view
+                            editTextName.setText(product.name)
+                        }
+
+                    }
+                } else {
+                    Log.e(TAG, "Failed to load product: ${response.errorBody()?.string()}")
+                    Toast.makeText(requireContext(), "Failed to load products.", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<List<ProductDataClass>>, t: Throwable) {
+                progressBar.visibility = View.GONE
+                Log.e(TAG, "HTTP GET request failed: ${t.message}")
+                Toast.makeText(requireContext(), "Error loading warehouses.", Toast.LENGTH_SHORT).show()
+            }
+        })
+        //===============================================
     }
 }
