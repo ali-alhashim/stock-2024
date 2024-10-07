@@ -9,6 +9,7 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
 import android.Manifest
+import android.app.ProgressDialog
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.provider.MediaStore
@@ -172,10 +173,19 @@ class AddFragment : Fragment() {
 
         } // end scan action
 
+        // -----++++++ Add Product
 
         addBtn.setOnClickListener {
-            // Send data with image to PHP API
-            Log.e(TAG, "send data with image to PHP API")
+            // Validate inputs before proceeding
+            if (editTextName.text.isNullOrBlank() || editTextNewStock.text.isNullOrBlank() || editTextBarcode.text.isNullOrBlank()) {
+                Toast.makeText(requireContext(), "Please fill in all required fields", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+
+            if (imageView.drawable == null) {
+                Toast.makeText(requireContext(), "Please select an image", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
 
             // Prepare data for API call
             val theUsername = RequestBody.create(MediaType.parse("text/plain"), username)
@@ -186,13 +196,13 @@ class AddFragment : Fragment() {
             val newStock = RequestBody.create(MediaType.parse("text/plain"), editTextNewStock.text.toString())
             val description = RequestBody.create(MediaType.parse("text/plain"), editTextDescription.text.toString())
             val manufacture = RequestBody.create(MediaType.parse("text/plain"), editTextManufacture.text.toString())
-            val location    = RequestBody.create(MediaType.parse("text/plain"), editTextLocation.text.toString())
+            val location = RequestBody.create(MediaType.parse("text/plain"), editTextLocation.text.toString())
             val warehouse_id = RequestBody.create(MediaType.parse("text/plain"), spinnerWarehouse.selectedItem.toString())
             val barcode = RequestBody.create(MediaType.parse("text/plain"), editTextBarcode.text.toString())
 
-            // Get the image from ImageView, convert it to a file or a byte stream
+            // Get the image from ImageView, convert it to a file
             val bitmap = (imageView.drawable as BitmapDrawable).bitmap
-            val file = File(requireContext().cacheDir, editTextBarcode.text.toString()+".jpg")
+            val file = File(requireContext().cacheDir, editTextBarcode.text.toString() + ".jpg")
 
             // Write bitmap to file
             val outStream = FileOutputStream(file)
@@ -213,38 +223,47 @@ class AddFragment : Fragment() {
             val apiService = retrofit.create(ApiServiceAddProduct::class.java)
 
             // Call the API with the data
-            val call = apiService.addProduct(theUsername, function, device, token, name, theImage, newStock, description, manufacture,location, warehouse_id,barcode)
+            val call = apiService.addProduct(theUsername, function, device, token, name, theImage, newStock, description, manufacture, location, warehouse_id, barcode)
 
-            // You can enqueue the call to handle response asynchronously
+            // Show a loading spinner or progress indicator
+            val loadingDialog = ProgressDialog(requireContext())
+            loadingDialog.setMessage("Saving product, please wait...")
+            loadingDialog.setCancelable(false)
+            loadingDialog.show()
+
+            // Enqueue the API call
             call.enqueue(object : Callback<AddProductDataClass> {
                 override fun onResponse(call: Call<AddProductDataClass>, response: Response<AddProductDataClass>) {
+                    loadingDialog.dismiss() // Dismiss loading dialog
                     if (response.isSuccessful) {
-                        Log.d(TAG, "Response: ${response.body().toString()}")
+                        
+                        Log.d(TAG, "Raw response: ${response.raw().toString()}")
 
                         // Handle successful response
                         response.body()?.let { Response ->
                             if (Response.status == "success") {
-                                Toast.makeText(requireContext(), "the Product Saved Successfully", Toast.LENGTH_LONG).show()
-                                }
-                            else {
+                                Toast.makeText(requireContext(), "The Product Saved Successfully", Toast.LENGTH_LONG).show()
+                                // Optionally clear the form after a successful save
+                            } else {
                                 Toast.makeText(requireContext(), Response.message, Toast.LENGTH_LONG).show()
                             }
-                            }
                         }
-                     else {
-                        Log.e(TAG, "Login failed. HTTP error code: ${response.code()}")
+                    } else {
+                        Log.e(TAG, "Saving product failed. HTTP error code: ${response.code()}")
                         Toast.makeText(requireContext(), "Saving product failed. Error code: ${response.code()}", Toast.LENGTH_LONG).show()
                     }
                 }
 
                 override fun onFailure(call: Call<AddProductDataClass>, t: Throwable) {
+                    loadingDialog.dismiss() // Dismiss loading dialog
                     Log.e(TAG, "Connection failed: ${t.message}")
                     Toast.makeText(requireContext(), "Failed to connect to server. Check URL and try again.", Toast.LENGTH_LONG).show()
                 }
             })
-            //------------------------------------------------------------
 
+            //------------------------------------------------------------
         }
+
 
 
 
