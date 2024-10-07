@@ -9,6 +9,7 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
 import android.Manifest
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.provider.MediaStore
 import android.text.Editable
@@ -30,10 +31,15 @@ import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import okhttp3.MediaType
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 
 class AddFragment : Fragment() {
 
@@ -51,6 +57,7 @@ class AddFragment : Fragment() {
     private lateinit var progressBar:ProgressBar
     private lateinit var preferences:SharedPreferences
     private lateinit var token:String
+    private lateinit var username:String
     private lateinit var savedServerURL:String
 
 
@@ -69,8 +76,9 @@ class AddFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_add, container, false)
 
-        preferences = requireActivity().getSharedPreferences("alhashim-stock", Context.MODE_PRIVATE)
-        token = preferences.getString("token", "").toString()
+        preferences    = requireActivity().getSharedPreferences("alhashim-stock", Context.MODE_PRIVATE)
+        token          = preferences.getString("token", "").toString()
+        username       = preferences.getString("username", "").toString()
         savedServerURL = preferences.getString("server", "").toString()
 
 
@@ -161,6 +169,22 @@ class AddFragment : Fragment() {
             startActivityForResult(intent, SCAN_BARCODE_REQUEST_CODE)
 
         } // end scan action
+
+
+        addBtn.setOnClickListener(){
+            // send data with image to php api
+            Log.e(TAG, "send data with image to php api")
+
+            //*************************************** Add product
+            val theUsername = RequestBody.create(MediaType.parse("text/plain"), username)
+            val function    = RequestBody.create(MediaType.parse("text/plain"), "addProduct")
+            val device      = RequestBody.create(MediaType.parse("text/plain"), "android")
+            val token       = RequestBody.create(MediaType.parse("text/plain"), token)
+            val name        = RequestBody.create(MediaType.parse("text/plain"), "product_name")
+
+            
+            //***************************************************
+        }
 
 
 

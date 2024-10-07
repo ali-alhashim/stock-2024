@@ -58,7 +58,7 @@ session_start();
                     {     
                       echo '<tr>
                                  <td>'.$row["id"].'</td>
-                                 <td><a href="/static/img/uploads/'.$row["image"].'" target="_blank"><img src="/static/img/uploads/'.$row["image"].'" alt="Product Image" style="max-width:200px"></a></td>
+                                 <td><a href="../../static/img/uploads/'.$row["image"].'" target="_blank"><img src="../../static/img/uploads/'.$row["image"].'" alt="Product Image" style="max-width:200px"></a></td>
                                  <td>'.$row["barcode"].'</td>
                                   <td>'.$row["name"].'</td>
                                  <td>'.$row["username"].'</td>

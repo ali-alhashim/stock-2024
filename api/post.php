@@ -25,6 +25,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
   {
      login($_POST, $conn);
   }
+  elseif($function =="addProduct")
+  {
+    addProduct($_POST, $conn);
+  }
 }
 
 function validateUser($username, $password, $conn) {
@@ -118,6 +122,22 @@ echo json_encode($response);
 
 
 } // end login
+
+
+
+
+
+
+
+
+//--------------------Add product
+function addProduct($data, $conn)
+{
+  $username = isset($data['username']) ? trim($data['username']) : '';
+  $device   = isset($data['device'])   ? trim($data['device']) : '';
+  $token    = isset($data['token'])   ? trim($data['token']) : '';
+
+}
 
 
 ?>
