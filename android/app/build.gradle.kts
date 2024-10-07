@@ -55,5 +55,7 @@ dependencies {
     implementation(libs.retrofit2)
     implementation(libs.gsonConverter)
     implementation(libs.googleMlkit)
+    implementation(libs.glide)
+    annotationProcessor(libs.glide.compiler)
 
 }

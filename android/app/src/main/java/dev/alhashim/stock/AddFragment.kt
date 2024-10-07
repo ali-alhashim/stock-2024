@@ -3,6 +3,7 @@ package dev.alhashim.stock
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -17,6 +18,7 @@ import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Retrofit
@@ -27,7 +29,11 @@ class AddFragment : Fragment() {
     private lateinit var warehousesList: MutableList<String>
     private lateinit var editTextBarcode: EditText
     private  lateinit var editTextName:EditText
+    private lateinit var editTextManufacture:EditText
     private lateinit var editTextDescription:EditText
+    private lateinit var editTextLocation:EditText
+    private lateinit var editTextNumberSigned:EditText
+    private lateinit var imageView:ImageView
     private val SCAN_BARCODE_REQUEST_CODE = 1001
     private lateinit var progressBar:ProgressBar
 
@@ -42,11 +48,11 @@ class AddFragment : Fragment() {
         editTextBarcode = view.findViewById(R.id.editTextBarcode)
         editTextName = view.findViewById(R.id.editTextName)
         editTextDescription = view.findViewById(R.id.editTextDescription)
-        val editTextManufacture: EditText = view.findViewById(R.id.editTextManufacture)
+        editTextManufacture = view.findViewById(R.id.editTextManufacture)
         val spinnerWarehouse: Spinner = view.findViewById(R.id.spinnerWarehouse)
-        val editTextLocation: EditText = view.findViewById(R.id.editTextLocation)
-        val editTextNumberSigned: EditText = view.findViewById(R.id.editTextNumberSigned)
-        val imageView: ImageView = view.findViewById(R.id.imageView)
+        editTextLocation = view.findViewById(R.id.editTextLocation)
+        editTextNumberSigned = view.findViewById(R.id.editTextNumberSigned)
+        imageView = view.findViewById(R.id.imageView)
         val addBtn: Button = view.findViewById(R.id.add_btn)
         progressBar = view.findViewById(R.id.progressBar) // Assuming you add a ProgressBar in XML
 
@@ -113,6 +119,10 @@ class AddFragment : Fragment() {
             editTextName.setText("")
             editTextBarcode.setText("")
             editTextDescription.setText("")
+            editTextManufacture.setText("")
+            editTextLocation.setText("")
+            editTextNumberSigned.setText("")
+
 
             val intent = Intent(requireContext(), BarcodeScanningActivity::class.java)
             startActivityForResult(intent, SCAN_BARCODE_REQUEST_CODE)
@@ -179,6 +189,17 @@ class AddFragment : Fragment() {
                         for (product in products) {
                             //here only set the result to view
                             editTextName.setText(product.name)
+                            editTextDescription.setText(product.description)
+                            editTextManufacture.setText(product.manufacture)
+                            editTextLocation.setText(product.location)
+                            editTextNumberSigned.setText(product.stock)
+
+                            Log.e(TAG, "setImageURI = ${savedServerURL +"static/img/uploads/"+ product.image}")
+
+                            val imageUrl = savedServerURL +"static/img/uploads/"+ product.image
+                            Glide.with(requireActivity()).load(imageUrl).into(imageView)
+
+
                         }
 
                     }

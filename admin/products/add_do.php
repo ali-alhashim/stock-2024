@@ -42,7 +42,7 @@ function handleFileUpload($file) {
     if (isset($file) && $file['size'] > 0) {  // Ensure file is uploaded
         $allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
         if (in_array($file['type'], $allowedTypes)) {
-            $uploadDir = $_SERVER['DOCUMENT_ROOT'] . '/static/img/uploads/';
+            $uploadDir = __DIR__ . '../../static/img/uploads/';
             if (!is_dir($uploadDir)) {
                 mkdir($uploadDir, 0755, true);
             }

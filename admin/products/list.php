@@ -65,7 +65,7 @@ session_start();
                                  <td>'.$row["id"].'</td>
                                  <td>'.$row["barcode"].'</td>
                                  <td>
-                                 <a href="/static/img/uploads/'.$row["image"].'" target="_blank"><img src="/static/img/uploads/'.$row["image"].'" alt="Product Image" style="max-width:200px"></a>
+                                 <a href="../../static/img/uploads/'.$row["image"].'" target="_blank"><img src="../../static/img/uploads/'.$row["image"].'" alt="Product Image" style="max-width:200px"></a>
                                  </td>
                                  <td>'.$row["name"].'</td>
                                  <td>'.$row["description"].'</td>
