@@ -1,0 +1,20 @@
+[2024-10-07 23:10:58] addProduct called
+[2024-10-07 23:10:58] 403 Forbidden. Invalid token, login required.
+[2024-10-07 23:11:13] Login admin From  Device Mobile android
+[2024-10-07 23:11:23] addProduct called
+[2024-10-07 23:11:23] 403 Forbidden. Invalid token, login required.
+[2024-10-07 23:12:35] addProduct calledadminwithe90700dcff6716bf702b77079c2a0c112f5b1fcc892d1f2a740294f3678036d7
+[2024-10-07 23:12:35] 403 Forbidden. Invalid token, login required.
+[2024-10-07 23:12:50] addProduct called adminwithe90700dcff6716bf702b77079c2a0c112f5b1fcc892d1f2a740294f3678036d7
+[2024-10-07 23:12:50] 403 Forbidden. Invalid token, login required.
+[2024-10-07 23:13:15] addProduct called admin with e90700dcff6716bf702b77079c2a0c112f5b1fcc892d1f2a740294f3678036d7
+[2024-10-07 23:13:15] 403 Forbidden. Invalid token, login required.
+[2024-10-07 23:13:53] addProduct called admin with e90700dcff6716bf702b77079c2a0c112f5b1fcc892d1f2a740294f3678036d7
+[2024-10-07 23:13:53] 403 Forbidden. Invalid token, login required.
+[2024-10-07 23:16:17] addProduct called admin with e90700dcff6716bf702b77079c2a0c112f5b1fcc892d1f2a740294f3678036d7 | 
+[2024-10-07 23:16:17] 403 Forbidden. Invalid token, login required.
+[2024-10-07 23:22:38] addProduct called admin with e90700dcff6716bf702b77079c2a0c112f5b1fcc892d1f2a740294f3678036d7 | 
+[2024-10-07 23:22:38] 403 Forbidden. Invalid token, login required.
+[2024-10-07 23:22:46] Login admin From  Device Mobile android 673dc76c896559631a5b76cfbe5088a6b54cc6e0a63aa928031afd29440d2968
+[2024-10-07 23:23:00] addProduct called admin with 673dc76c896559631a5b76cfbe5088a6b54cc6e0a63aa928031afd29440d2968 | 
+[2024-10-07 23:23:00] 403 Forbidden. Invalid token, login required.

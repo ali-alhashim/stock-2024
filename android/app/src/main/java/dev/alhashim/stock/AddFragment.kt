@@ -32,6 +32,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import com.google.gson.GsonBuilder
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -215,9 +216,14 @@ class AddFragment : Fragment() {
             val theImage = MultipartBody.Part.createFormData("image", file.name, imageRequestBody)
 
             // Create the Retrofit instance and API service
+            val gson = GsonBuilder()
+                .setLenient()
+                .create()
+
+
             val retrofit = Retrofit.Builder()
                 .baseUrl(savedServerURL)  // Get the correct URL string from TextInputEditText
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .build()
 
             val apiService = retrofit.create(ApiServiceAddProduct::class.java)
@@ -235,21 +241,20 @@ class AddFragment : Fragment() {
             call.enqueue(object : Callback<AddProductDataClass> {
                 override fun onResponse(call: Call<AddProductDataClass>, response: Response<AddProductDataClass>) {
                     loadingDialog.dismiss() // Dismiss loading dialog
-                    if (response.isSuccessful) {
-                        
-                        Log.d(TAG, "Raw response: ${response.raw().toString()}")
+                    Log.d(TAG, "Raw response: ${response.raw().toString()}")
 
+                    if (response.isSuccessful) {
                         // Handle successful response
-                        response.body()?.let { Response ->
-                            if (Response.status == "success") {
+                        response.body()?.let { response ->
+                            if (response.status == "success") {
                                 Toast.makeText(requireContext(), "The Product Saved Successfully", Toast.LENGTH_LONG).show()
                                 // Optionally clear the form after a successful save
                             } else {
-                                Toast.makeText(requireContext(), Response.message, Toast.LENGTH_LONG).show()
+                                Toast.makeText(requireContext(), response.message, Toast.LENGTH_LONG).show()
                             }
                         }
                     } else {
-                        Log.e(TAG, "Saving product failed. HTTP error code: ${response.code()}")
+                        Log.e(TAG, "Saving product failed. HTTP error code: ${response.body()?.message}")
                         Toast.makeText(requireContext(), "Saving product failed. Error code: ${response.code()}", Toast.LENGTH_LONG).show()
                     }
                 }
@@ -257,7 +262,7 @@ class AddFragment : Fragment() {
                 override fun onFailure(call: Call<AddProductDataClass>, t: Throwable) {
                     loadingDialog.dismiss() // Dismiss loading dialog
                     Log.e(TAG, "Connection failed: ${t.message}")
-                    Toast.makeText(requireContext(), "Failed to connect to server. Check URL and try again.", Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), "Failed to connect to server. Check URL and try again. ${t.message}", Toast.LENGTH_LONG).show()
                 }
             })
 

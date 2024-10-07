@@ -3,3 +3,11 @@ Options -Indexes
     Order allow,deny
     Deny from all
 </FilesMatch>
+
+# Deny access to log.txt
+<Files "log.txt">
+    Deny from all
+</Files>
+
+# Custom Error Page for 403 Forbidden
+ErrorDocument 403 /403.php

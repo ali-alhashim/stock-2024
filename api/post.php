@@ -6,12 +6,16 @@ ini_set('session.sid_length', 64);  // 256 characters long
 session_start();
 require('../admin/base/config.php');
 require('../admin/base/logs_func.php');
+require('../admin/base/log_to_file.php');
 
 $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
 
 
 // Check connection
 if ($conn->connect_error) {
+
+  logToFile("Database Connection Faild");
+
   die("Connection failed: " . $conn->connect_error);
 }
 
@@ -61,6 +65,8 @@ function validateUser($username, $password, $conn) {
            
            
            action_log($user['id'], "Login ".$user['username']." From  Device Mobile android", $conn);
+
+           logToFile("Login ".$user['username']." From  Device Mobile android ".$_SESSION['csrf_token']);
            
            return true;
            
@@ -110,6 +116,7 @@ if (validateUser($username, $password, $conn)) {
   $response['token'] = $_SESSION['csrf_token'];
   $response['message'] = 'Login successful';
   $response['status'] = 'success';
+
 } else {
   $response['message'] = 'Invalid username or password';
   $response['status'] = 'error';
@@ -133,12 +140,16 @@ echo json_encode($response);
 //--------------------Add product
 function addProduct($data, $conn)
 {
+    
+
     $username = isset($data['username']) ? trim($data['username']) : '';
     $device   = isset($data['device'])   ? trim($data['device']) : '';
     $token    = isset($data['token'])    ? trim($data['token']) : '';
     $newStock = isset($data['newStock']) ? intval($data['newStock']) : 0;
     $barcode  = isset($data['barcode'])  ? trim($data['barcode']) : '';
     $image    = isset($_FILES['image'])  ? $_FILES['image'] : null;
+
+    logToFile("addProduct called ".$username . " with " . $token . " | ".$_SESSION['csrf_token']);
 
     // Initialize response data
     $response = [
@@ -147,12 +158,15 @@ function addProduct($data, $conn)
     ];
 
     // Check if the token is valid
-    if ($token === $_SESSION['csrf_token']) {
+    if ($token == $_SESSION['csrf_token']) {
 
         // Check if barcode and other necessary fields are provided
         if (empty($barcode) || empty($newStock) || empty($username)) {
             $response['message'] = "400 Bad Request. Missing required fields.";
             $response['status'] = '400';
+
+            logToFile("400 Bad Request. Missing required fields.");
+
             echo json_encode($response);
             return;
         }
@@ -175,12 +189,16 @@ function addProduct($data, $conn)
                 } else {
                     $response['message'] = "500 Internal Server Error. Failed to upload image.";
                     $response['status'] = '500';
+
+                    logToFile("500 Internal Server Error. Failed to upload image.");
                     echo json_encode($response);
                     return;
                 }
             } else {
                 $response['message'] = "400 Bad Request. Invalid image type.";
                 $response['status'] = '400';
+
+                logToFile("400 Bad Request. Invalid image type.");
                 echo json_encode($response);
                 return;
             }
@@ -206,10 +224,12 @@ function addProduct($data, $conn)
             $updateStmt->bind_param("is", $theNewStock, $barcode);
             if ($updateStmt->execute()) {
                 $response["message"] = "Product stock updated successfully.";
-                $response["status"] = "200";
+                $response["status"] = "success";
+                logToFile("Product stock updated successfully.");
             } else {
                 $response["message"] = "500 Internal Server Error. Failed to update stock.";
                 $response["status"] = "500";
+                logToFile("500 Internal Server Error. Failed to update stock.");
             }
             $updateStmt->close();
         } else {
@@ -220,10 +240,12 @@ function addProduct($data, $conn)
 
             if ($insertStmt->execute()) {
                 $response["message"] = "Product added successfully.";
-                $response["status"] = "200";
+                $response["status"] = "success";
+                logToFile("Product added successfully.");
             } else {
                 $response["message"] = "500 Internal Server Error. Failed to insert new product.";
                 $response["status"] = "500";
+                logToFile("500 Internal Server Error. Failed to insert new product.");
             }
             $insertStmt->close();
         }
@@ -232,6 +254,7 @@ function addProduct($data, $conn)
         // Invalid token
         $response["message"] = "403 Forbidden. Invalid token, login required.";
         $response["status"] = "403";
+        logToFile("403 Forbidden. Invalid token, login required.");
     }
 
     // Return response as JSON
