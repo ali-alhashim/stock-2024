@@ -32,9 +32,11 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import okhttp3.MediaType
+import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
@@ -171,20 +173,79 @@ class AddFragment : Fragment() {
         } // end scan action
 
 
-        addBtn.setOnClickListener(){
-            // send data with image to php api
-            Log.e(TAG, "send data with image to php api")
+        addBtn.setOnClickListener {
+            // Send data with image to PHP API
+            Log.e(TAG, "send data with image to PHP API")
 
-            //*************************************** Add product
+            // Prepare data for API call
             val theUsername = RequestBody.create(MediaType.parse("text/plain"), username)
-            val function    = RequestBody.create(MediaType.parse("text/plain"), "addProduct")
-            val device      = RequestBody.create(MediaType.parse("text/plain"), "android")
-            val token       = RequestBody.create(MediaType.parse("text/plain"), token)
-            val name        = RequestBody.create(MediaType.parse("text/plain"), "product_name")
+            val function = RequestBody.create(MediaType.parse("text/plain"), "addProduct")
+            val device = RequestBody.create(MediaType.parse("text/plain"), "android")
+            val token = RequestBody.create(MediaType.parse("text/plain"), token)
+            val name = RequestBody.create(MediaType.parse("text/plain"), editTextName.text.toString())
+            val newStock = RequestBody.create(MediaType.parse("text/plain"), editTextNewStock.text.toString())
+            val description = RequestBody.create(MediaType.parse("text/plain"), editTextDescription.text.toString())
+            val manufacture = RequestBody.create(MediaType.parse("text/plain"), editTextManufacture.text.toString())
+            val location    = RequestBody.create(MediaType.parse("text/plain"), editTextLocation.text.toString())
+            val warehouse_id = RequestBody.create(MediaType.parse("text/plain"), spinnerWarehouse.selectedItem.toString())
+            val barcode = RequestBody.create(MediaType.parse("text/plain"), editTextBarcode.text.toString())
 
-            
-            //***************************************************
+            // Get the image from ImageView, convert it to a file or a byte stream
+            val bitmap = (imageView.drawable as BitmapDrawable).bitmap
+            val file = File(requireContext().cacheDir, editTextBarcode.text.toString()+".jpg")
+
+            // Write bitmap to file
+            val outStream = FileOutputStream(file)
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outStream)
+            outStream.flush()
+            outStream.close()
+
+            // Create a RequestBody for the image
+            val imageRequestBody = RequestBody.create(MediaType.parse("image/jpeg"), file)
+            val theImage = MultipartBody.Part.createFormData("image", file.name, imageRequestBody)
+
+            // Create the Retrofit instance and API service
+            val retrofit = Retrofit.Builder()
+                .baseUrl(savedServerURL)  // Get the correct URL string from TextInputEditText
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+
+            val apiService = retrofit.create(ApiServiceAddProduct::class.java)
+
+            // Call the API with the data
+            val call = apiService.addProduct(theUsername, function, device, token, name, theImage, newStock, description, manufacture,location, warehouse_id,barcode)
+
+            // You can enqueue the call to handle response asynchronously
+            call.enqueue(object : Callback<AddProductDataClass> {
+                override fun onResponse(call: Call<AddProductDataClass>, response: Response<AddProductDataClass>) {
+                    if (response.isSuccessful) {
+                        Log.d(TAG, "Response: ${response.body().toString()}")
+
+                        // Handle successful response
+                        response.body()?.let { Response ->
+                            if (Response.status == "success") {
+                                Toast.makeText(requireContext(), "the Product Saved Successfully", Toast.LENGTH_LONG).show()
+                                }
+                            else {
+                                Toast.makeText(requireContext(), Response.message, Toast.LENGTH_LONG).show()
+                            }
+                            }
+                        }
+                     else {
+                        Log.e(TAG, "Login failed. HTTP error code: ${response.code()}")
+                        Toast.makeText(requireContext(), "Saving product failed. Error code: ${response.code()}", Toast.LENGTH_LONG).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<AddProductDataClass>, t: Throwable) {
+                    Log.e(TAG, "Connection failed: ${t.message}")
+                    Toast.makeText(requireContext(), "Failed to connect to server. Check URL and try again.", Toast.LENGTH_LONG).show()
+                }
+            })
+            //------------------------------------------------------------
+
         }
+
 
 
 

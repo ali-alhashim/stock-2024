@@ -17,6 +17,12 @@ interface ApiServiceAddProduct {
         @Part("device") device: RequestBody,       //android
         @Part("token") token: RequestBody,         //token
         @Part("name") name: RequestBody,           //product name
-        @Part image: MultipartBody.Part            //product image
+        @Part image: MultipartBody.Part,            //product image
+        @Part("newStock") newStock:RequestBody,
+        @Part("description")description:RequestBody, //description
+        @Part("manufacture")manufacture:RequestBody, // manufacture
+        @Part("location")location:RequestBody, //location
+        @Part("warehouse_id")warehouse_id:RequestBody, //
+        @Part("barcode")barcode:RequestBody
     ): Call<AddProductDataClass>
 }
