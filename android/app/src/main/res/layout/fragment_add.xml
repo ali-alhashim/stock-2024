@@ -132,18 +132,87 @@
 
 
 
-
-            <EditText
-                android:id="@+id/editTextNumberSigned"
+            <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autofillHints=""
-                android:ems="10"
-                android:textColor="@color/black"
-                android:textColorHint="@color/dark_gray"
                 android:layout_margin="10dp"
-                android:hint="@string/quantity"
-                android:inputType="numberSigned" />
+                android:stretchColumns="0">
+
+              <TableRow>
+
+                  <TextView
+                      android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+
+                      android:text="Stock"
+                      android:textColor="@color/black"
+                      android:textSize="20sp" />
+
+                  <EditText
+                      android:id="@+id/editTextNumberSigned"
+                      android:layout_width="100dp"
+                      android:layout_height="wrap_content"
+                      android:autofillHints=""
+                      android:ems="10"
+                      android:enabled="false"
+                      android:hint="@string/stock"
+                      android:inputType="numberSigned"
+
+                      android:text="0"
+
+                      android:textColor="@color/black"
+                      android:textColorHint="@color/dark_gray" />
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="IN / - OUT:"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+
+                  <EditText
+                      android:id="@+id/editTextQuantity"
+                      android:layout_width="100dp"
+                      android:layout_height="wrap_content"
+                      android:autofillHints=""
+                      android:ems="10"
+                      android:textColor="@color/black"
+                      android:textColorHint="@color/dark_gray"
+
+                      android:hint="@string/quantity"
+                      android:text="1"
+                      android:inputType="numberSigned" />
+
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="New Stock"
+                        android:textColor="@color/black"
+                        android:textSize="20sp" />
+
+                  <EditText
+                      android:id="@+id/editTextNewStock"
+                      android:layout_width="100dp"
+                      android:layout_height="wrap_content"
+                      android:autofillHints=""
+                      android:ems="10"
+                      android:textColor="@color/black"
+                      android:textColorHint="@color/dark_gray"
+                      android:enabled="false"
+                      android:hint="1"
+
+                      android:inputType="numberSigned" />
+
+
+              </TableRow>
+            </TableLayout>
 
             <ImageView
                 android:id="@+id/imageView"

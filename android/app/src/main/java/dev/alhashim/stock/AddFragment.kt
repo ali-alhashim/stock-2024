@@ -1,10 +1,18 @@
 package dev.alhashim.stock
 
+import android.app.Activity
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.net.Uri
+import android.Manifest
 import android.os.Bundle
+import android.provider.MediaStore
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +24,10 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.Spinner
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import retrofit2.Call
@@ -33,9 +44,23 @@ class AddFragment : Fragment() {
     private lateinit var editTextDescription:EditText
     private lateinit var editTextLocation:EditText
     private lateinit var editTextNumberSigned:EditText
+    private lateinit var editTextQuantity:EditText
+    private lateinit var editTextNewStock:EditText
     private lateinit var imageView:ImageView
     private val SCAN_BARCODE_REQUEST_CODE = 1001
     private lateinit var progressBar:ProgressBar
+    private lateinit var preferences:SharedPreferences
+    private lateinit var token:String
+    private lateinit var savedServerURL:String
+
+
+    private val cameraIntentLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val imageBitmap = result.data?.extras?.get("data") as Bitmap
+            imageView.setImageBitmap(imageBitmap) // Set image to ImageView
+        }
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,6 +69,13 @@ class AddFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_add, container, false)
 
+        preferences = requireActivity().getSharedPreferences("alhashim-stock", Context.MODE_PRIVATE)
+        token = preferences.getString("token", "").toString()
+        savedServerURL = preferences.getString("server", "").toString()
+
+
+
+
         val scanBtn: Button = view.findViewById(R.id.scan_btn)
         editTextBarcode = view.findViewById(R.id.editTextBarcode)
         editTextName = view.findViewById(R.id.editTextName)
@@ -51,7 +83,9 @@ class AddFragment : Fragment() {
         editTextManufacture = view.findViewById(R.id.editTextManufacture)
         val spinnerWarehouse: Spinner = view.findViewById(R.id.spinnerWarehouse)
         editTextLocation = view.findViewById(R.id.editTextLocation)
-        editTextNumberSigned = view.findViewById(R.id.editTextNumberSigned)
+        editTextNumberSigned = view.findViewById(R.id.editTextNumberSigned) // current stock quantity
+        editTextQuantity     = view.findViewById(R.id.editTextQuantity) // in / out quantity
+        editTextNewStock     = view.findViewById(R.id.editTextNewStock) // the new Stock quantity = current stock quantity + (in / out quantity)
         imageView = view.findViewById(R.id.imageView)
         val addBtn: Button = view.findViewById(R.id.add_btn)
         progressBar = view.findViewById(R.id.progressBar) // Assuming you add a ProgressBar in XML
@@ -64,11 +98,10 @@ class AddFragment : Fragment() {
         adapterForWarehouses.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinnerWarehouse.adapter = adapterForWarehouses
 
-        // Retrieve server URL from SharedPreferences
-        val preferences = requireActivity().getSharedPreferences("alhashim-stock", Context.MODE_PRIVATE)
-        val savedServerURL = preferences.getString("server", "")
 
-        if (savedServerURL.isNullOrBlank()) {
+
+
+        if (savedServerURL.isBlank()) {
             Toast.makeText(requireContext(), "Server URL is missing. Please configure it in settings.", Toast.LENGTH_SHORT).show()
             return view
         }
@@ -84,7 +117,7 @@ class AddFragment : Fragment() {
             .create(ApiServiceWarehouse::class.java)
 
         // API call to get Warehouses
-        apiWarehouse.getWarehouses().enqueue(object : Callback<List<WarehouseDataClass>> {
+        apiWarehouse.getWarehouses(token).enqueue(object : Callback<List<WarehouseDataClass>> {
             override fun onResponse(
                 call: Call<List<WarehouseDataClass>>,
                 response: retrofit2.Response<List<WarehouseDataClass>>
@@ -130,7 +163,81 @@ class AddFragment : Fragment() {
         } // end scan action
 
 
+
+
+        //TextWatcher ---------
+        // TextWatcher for detecting changes in the EditText fields
+        val textWatcher = object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // No action needed here
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                calculateNewStock() // Calculate and update new stock when text changes
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                // No action needed here
+            }
+        }
+        //End TextWatcher------
+
+
+        // Attach TextWatcher to both EditText fields
+        editTextNumberSigned.addTextChangedListener(textWatcher)
+        editTextQuantity.addTextChangedListener(textWatcher)
+
+
+
+        // ImageView Click open Camera take photo set to self
+         val cameraIntentLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val imageBitmap = result.data?.extras?.get("data") as Bitmap
+                imageView.setImageBitmap(imageBitmap) // Set image to ImageView
+            }
+        }
+
+
+
+        //-------------------------------------------------
+
+
+
+
+
         return view
+    } // end OnCreateView
+
+
+    // Handle permissions request
+    val permissionRequestLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+        if (granted) {
+            openCamera()  // Permission granted, open camera
+        } else {
+            // Permission denied, handle accordingly (e.g., show message)
+        }
+    }
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        imageView = view.findViewById(R.id.imageView) // Find your ImageView
+
+        // Set OnClickListener on ImageView to open the camera
+        imageView.setOnClickListener {
+            // Check for camera permission
+            if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                permissionRequestLauncher.launch(Manifest.permission.CAMERA)
+            } else {
+                openCamera() // If permission already granted, open the camera
+            }
+        }
+    }
+
+    private fun openCamera() {
+        val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        cameraIntentLauncher.launch(cameraIntent)
     }
 
 
@@ -157,10 +264,7 @@ class AddFragment : Fragment() {
 
     private fun getProduct(barcodeValue:String){
         //===============================================
-        //send get request to server for the item with barcode = barcodeValue
-        val preferences = requireActivity().getSharedPreferences("alhashim-stock", Context.MODE_PRIVATE)
-        var token = preferences.getString("token", "")
-        val savedServerURL = preferences.getString("server", "")
+
 
         //-------------send get request for product with barcode
         // Create Retrofit instance
@@ -172,10 +276,7 @@ class AddFragment : Fragment() {
             .create(ApiServiceProduct::class.java)
 
         //^^^^^call the api^^^^^^^^^^
-        if(token == null)
-        {
-            token = "no login !"
-        }
+
         apiGetProductByBarcode.getProduct(barcodeValue, token).enqueue(object : Callback<List<ProductDataClass>> {
             override fun onResponse(
                 call: Call<List<ProductDataClass>>,
@@ -216,5 +317,17 @@ class AddFragment : Fragment() {
             }
         })
         //===============================================
+    } //end get Product
+
+    // Function to calculate and update the new stock quantity
+    fun calculateNewStock() {
+        val currentStock = editTextNumberSigned.text.toString().toIntOrNull() ?: 0 // Get current stock or 0 if input is invalid
+        val inOutQuantity = editTextQuantity.text.toString().toIntOrNull() ?: 0 // Get in/out quantity or 0 if input is invalid
+
+        val newStockQuantity = currentStock + inOutQuantity // Calculate new stock quantity
+        editTextNewStock.setText(newStockQuantity.toString()) // Update the new stock EditText with the result
     }
-}
+
+
+
+}//end class

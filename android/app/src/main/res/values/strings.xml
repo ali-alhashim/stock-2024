@@ -18,4 +18,5 @@
     <string name="add">Add</string>
     <string name="select">Select</string>
     <string name="camera_preview">Camera preview</string>
+    <string name="stock">Stock</string>
 </resources>
