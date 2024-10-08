@@ -61,12 +61,12 @@ function validateUser($username, $password, $conn) {
            $_SESSION['user_id']    = $user['id'];
            $_SESSION['username']   = $user['username'];
            $_SESSION['role']       = $user['role'];
-           $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); // Generates a secure token
+           $_SESSION['token'] = bin2hex(random_bytes(32)); // Generates a secure token
            
            
            action_log($user['id'], "Login ".$user['username']." From  Device Mobile android", $conn);
 
-           logToFile("Login ".$user['username']." From  Device Mobile android ".$_SESSION['csrf_token']);
+           logToFile("Login ".$user['username']." From  Device Mobile android ".$_SESSION['token']);
            
            return true;
            
@@ -113,9 +113,21 @@ if (empty($username) || empty($password) || empty($device)) {
 // Authenticate user
 if (validateUser($username, $password, $conn)) {
  
-  $response['token'] = $_SESSION['csrf_token'];
+  $response['token'] = $_SESSION['token'];
   $response['message'] = 'Login successful';
   $response['status'] = 'success';
+
+
+  // Send PHP session ID (PHPSESSID) as a response cookie to the Android app
+  setcookie('PHPSESSID', session_id(), [
+    'expires' => 0,                // Session cookie
+    'path' => '/',                 // Available throughout the entire domain
+    'domain' => '',                // Current domain
+    'secure' => false,              // Set to true if using HTTPS
+    'httponly' => true,            // Prevent JavaScript access
+    'samesite' => 'Lax'            // Control cross-origin cookie behavior
+]);
+
 
 } else {
   $response['message'] = 'Invalid username or password';
@@ -141,7 +153,9 @@ echo json_encode($response);
 function addProduct($data, $conn)
 {
     
+    $description = isset($data['description']) ? trim($data['description']) : '';
 
+    $name = isset($data['name']) ? trim($data['name']) : '';
     $username = isset($data['username']) ? trim($data['username']) : '';
     $device   = isset($data['device'])   ? trim($data['device']) : '';
     $token    = isset($data['token'])    ? trim($data['token']) : '';
@@ -149,7 +163,8 @@ function addProduct($data, $conn)
     $barcode  = isset($data['barcode'])  ? trim($data['barcode']) : '';
     $image    = isset($_FILES['image'])  ? $_FILES['image'] : null;
 
-    logToFile("addProduct called ".$username . " with " . $token . " | ".$_SESSION['csrf_token']);
+    logToFile("addProduct called ".$username . " with " . $token . " | ".$_SESSION['token']. " POST: ".print_r($data));
+    logToFile("Cookies found in the request: " . print_r($_COOKIE, true));
 
     // Initialize response data
     $response = [
@@ -158,7 +173,7 @@ function addProduct($data, $conn)
     ];
 
     // Check if the token is valid
-    if ($token == $_SESSION['csrf_token']) {
+    if ($token == $_SESSION['token']) {
 
         // Check if barcode and other necessary fields are provided
         if (empty($barcode) || empty($newStock) || empty($username)) {
@@ -185,7 +200,7 @@ function addProduct($data, $conn)
             if (in_array($imageFileType, $allowedTypes)) {
                 // Move the file to the uploads directory
                 if (move_uploaded_file($image['tmp_name'], $targetFile)) {
-                    $imagePath = '/static/img/uploads/' . $imageName; // Store relative path for the DB
+                    $imagePath =  $imageName; // Store relative path for the DB
                 } else {
                     $response['message'] = "500 Internal Server Error. Failed to upload image.";
                     $response['status'] = '500';
@@ -217,7 +232,7 @@ function addProduct($data, $conn)
             $stmt->close();
 
             // Calculate new stock
-            $theNewStock = $currentStock + $newStock;
+            $theNewStock =  $newStock;
 
             // Update the product stock
             $updateStmt = $conn->prepare("UPDATE products SET stock = ? WHERE barcode = ?");
@@ -234,9 +249,14 @@ function addProduct($data, $conn)
             $updateStmt->close();
         } else {
             // Product does not exist, insert a new row
-            $insertStmt = $conn->prepare("INSERT INTO products (barcode, stock, image, created_by_id) VALUES (?, ?, ?, ?)");
             $createdById = $_SESSION['user_id'];
-            $insertStmt->bind_param("siss", $barcode, $newStock, $imagePath, $createdById);
+            $warehouse_id = 1; // this must be received from android app
+
+            logToFile("Product does not exist, insert a new row");
+            logToFile("INSERT INTO products $barcode, $name, $newStock, $imagePath, $createdById, $description, $warehouse_id");
+            
+            $insertStmt = $conn->prepare("INSERT INTO products (barcode,name, stock, image, created_by_id, description,warehouse_id) VALUES (?, ?, ?, ?,?,?,?)");
+            $insertStmt->bind_param("ssisisi", $barcode,$name, $newStock, $imagePath, $createdById, $description, $warehouse_id);
 
             if ($insertStmt->execute()) {
                 $response["message"] = "Product added successfully.";

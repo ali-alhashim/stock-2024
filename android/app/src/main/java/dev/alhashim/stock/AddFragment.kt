@@ -35,6 +35,7 @@ import com.bumptech.glide.Glide
 import com.google.gson.GsonBuilder
 import okhttp3.MediaType
 import okhttp3.MultipartBody
+import okhttp3.OkHttpClient
 import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -63,6 +64,9 @@ class AddFragment : Fragment() {
     private lateinit var token:String
     private lateinit var username:String
     private lateinit var savedServerURL:String
+
+
+
 
 
     private val cameraIntentLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -221,8 +225,20 @@ class AddFragment : Fragment() {
                 .create()
 
 
+
+
+
+            // Create OkHttpClient with the cookie jar
+            val okHttpClient = OkHttpClient.Builder()
+                .cookieJar(CookieManager.cookieJar) // Use your custom CookieJar
+                .build()
+
+
+
+
             val retrofit = Retrofit.Builder()
                 .baseUrl(savedServerURL)  // Get the correct URL string from TextInputEditText
+                .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build()
 
@@ -253,7 +269,16 @@ class AddFragment : Fragment() {
                                 Toast.makeText(requireContext(), response.message, Toast.LENGTH_LONG).show()
                             }
                         }
-                    } else {
+
+                        //call scanbarcode agin to update
+                        try {
+                            getProduct(barcode.toString())
+                        }catch (e: Exception){
+                            Toast.makeText(requireContext(), "Product:${e.toString()}", Toast.LENGTH_SHORT).show()
+                        }
+
+                    }
+                    else {
                         Log.e(TAG, "Saving product failed. HTTP error code: ${response.body()?.message}")
                         Toast.makeText(requireContext(), "Saving product failed. Error code: ${response.code()}", Toast.LENGTH_LONG).show()
                     }
@@ -262,7 +287,15 @@ class AddFragment : Fragment() {
                 override fun onFailure(call: Call<AddProductDataClass>, t: Throwable) {
                     loadingDialog.dismiss() // Dismiss loading dialog
                     Log.e(TAG, "Connection failed: ${t.message}")
+                    //call scanbarcode agin to update
+                    try {
+                        getProduct(barcode.toString())
+                    }catch (e: Exception){
+                        Toast.makeText(requireContext(), "Product:${e.toString()}", Toast.LENGTH_SHORT).show()
+                    }
+
                     Toast.makeText(requireContext(), "Failed to connect to server. Check URL and try again. ${t.message}", Toast.LENGTH_LONG).show()
+
                 }
             })
 

@@ -2,6 +2,7 @@ package dev.alhashim.stock
 
 import android.content.ContentValues.TAG
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,6 +12,8 @@ import android.widget.Button
 import android.widget.Toast
 import com.google.android.material.textfield.TextInputEditText
 import androidx.fragment.app.Fragment
+import okhttp3.HttpUrl
+import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -18,6 +21,12 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class ServerFragment : Fragment() {
+
+    private lateinit var apiService: ApiServiceLogin // Declare the API service
+    private lateinit var retrofit: Retrofit // Declare the Retrofit instance
+
+    private lateinit var preferences: SharedPreferences
+    private  var savedServerURL:String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,13 +41,17 @@ class ServerFragment : Fragment() {
         val serverURL: TextInputEditText = view.findViewById(R.id.editTextServerURL)
 
         // Check if SharedPreferences alhashim-stock already set the values to username, serverURL
-        val preferences = requireActivity().getSharedPreferences("alhashim-stock", Context.MODE_PRIVATE)
-        val savedUsername = preferences.getString("username", "")
-        val savedServerURL = preferences.getString("server", "")
+         preferences = requireActivity().getSharedPreferences("alhashim-stock", Context.MODE_PRIVATE)
+         val savedUsername = preferences.getString("username", "")
+         savedServerURL = preferences.getString("server", "")
 
         // Set the previously saved username and server URL if they exist
         username.setText(savedUsername)
         serverURL.setText(savedServerURL)
+
+
+
+
 
         loginBtn.setOnClickListener {
             val usernameText = username.text.toString().trim()
@@ -61,18 +74,30 @@ class ServerFragment : Fragment() {
             Log.d(TAG, "Login clicked: username => $usernameText, password => $passwordText, server => $serverURLText")
 
             //----------------- send post request --------------
-            val retrofit = Retrofit.Builder()
+
+
+
+            // Create OkHttpClient with the cookie jar
+            val okHttpClient = OkHttpClient.Builder()
+                .cookieJar(CookieManager.cookieJar) // Use your custom CookieJar
+                .build()
+
+            retrofit = Retrofit.Builder()
                 .baseUrl(serverURLText)  // Get the correct URL string from TextInputEditText
+                .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
 
-            val apiService = retrofit.create(ApiServiceLogin::class.java)
+            apiService = retrofit.create(ApiServiceLogin::class.java)
             val call = apiService.login(usernameText, passwordText, "login", "android")
 
             call.enqueue(object : Callback<LoginDataClass> {
                 override fun onResponse(call: Call<LoginDataClass>, response: Response<LoginDataClass>) {
                     if (response.isSuccessful) {
                         Log.d(TAG, "Response: ${response.body().toString()}")
+
+                        val cookies = CookieManager.cookieJar.loadForRequest(HttpUrl.get(serverURLText))
+                        Log.d("Cookies", "Cookies after login: $cookies")
 
                         // Handle successful response
                         response.body()?.let { loginResponse ->
@@ -110,5 +135,8 @@ class ServerFragment : Fragment() {
         }
 
         return view
-    }
-}
+    } // end onCreateView
+
+
+
+}//end class
