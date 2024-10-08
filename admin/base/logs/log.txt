@@ -95,3 +95,31 @@
 [2024-10-08 22:08:01] Product does not exist, insert a new row
 [2024-10-08 22:08:01] INSERT INTO products 9781642743326, comptia security, 1, 9781642743326.jpg, 1, book for comptia security+, 1
 [2024-10-08 22:08:01] Product added successfully.
+[2024-10-08 22:10:28] addProduct called admin with 199a57f6143c9c57a149ec333e0fc0a9ec4a6550f07f84f9ebc681ae82519265 | 199a57f6143c9c57a149ec333e0fc0a9ec4a6550f07f84f9ebc681ae82519265 POST: 1
+[2024-10-08 22:10:28] Cookies found in the request: Array
+(
+    [PHPSESSID] => em2r55gjkqnr518tb4redulb6c30elg5pbf3rbmnd94urq4g8f63b3vfg83h96m3
+)
+
+[2024-10-08 22:10:28] Product stock updated successfully.
+[2024-10-08 22:17:30] addProduct called admin with 199a57f6143c9c57a149ec333e0fc0a9ec4a6550f07f84f9ebc681ae82519265 |  POST: 1
+[2024-10-08 22:17:30] Cookies found in the request: Array
+(
+)
+
+[2024-10-08 22:17:30] 403 Forbidden. Invalid token, login required.
+[2024-10-08 22:17:46] addProduct called admin with 199a57f6143c9c57a149ec333e0fc0a9ec4a6550f07f84f9ebc681ae82519265 |  POST: 1
+[2024-10-08 22:17:46] Cookies found in the request: Array
+(
+    [PHPSESSID] => b4m9hi7cp5cfo3s6ivfjdt2645a5ti07eeu328ci9prdi7ap69u47c7au60n4v9l
+)
+
+[2024-10-08 22:17:46] 403 Forbidden. Invalid token, login required.
+[2024-10-08 22:22:23] Login admin From  Device Mobile android 9c36fae0d789207fb2b5d52dfca1906f23222e3b6ee144c57b1a5b3e85e83e54
+[2024-10-08 22:22:42] addProduct called admin with 9c36fae0d789207fb2b5d52dfca1906f23222e3b6ee144c57b1a5b3e85e83e54 | 9c36fae0d789207fb2b5d52dfca1906f23222e3b6ee144c57b1a5b3e85e83e54 POST: 1
+[2024-10-08 22:22:42] Cookies found in the request: Array
+(
+    [PHPSESSID] => b4m9hi7cp5cfo3s6ivfjdt2645a5ti07eeu328ci9prdi7ap69u47c7au60n4v9l
+)
+
+[2024-10-08 22:22:42] Product stock updated successfully.

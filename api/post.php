@@ -154,6 +154,8 @@ function addProduct($data, $conn)
 {
     
     $description = isset($data['description']) ? trim($data['description']) : '';
+    $manufacture = isset($data['manufacture']) ? trim($data['manufacture']) : '';
+    $location = isset($data['location']) ? trim($data['location']) : '';
 
     $name = isset($data['name']) ? trim($data['name']) : '';
     $username = isset($data['username']) ? trim($data['username']) : '';
@@ -253,10 +255,10 @@ function addProduct($data, $conn)
             $warehouse_id = 1; // this must be received from android app
 
             logToFile("Product does not exist, insert a new row");
-            logToFile("INSERT INTO products $barcode, $name, $newStock, $imagePath, $createdById, $description, $warehouse_id");
+            logToFile("INSERT INTO products $barcode, $name, $newStock, $imagePath, $createdById, $description, $warehouse_id, $manufacture, $location");
             
-            $insertStmt = $conn->prepare("INSERT INTO products (barcode,name, stock, image, created_by_id, description,warehouse_id) VALUES (?, ?, ?, ?,?,?,?)");
-            $insertStmt->bind_param("ssisisi", $barcode,$name, $newStock, $imagePath, $createdById, $description, $warehouse_id);
+            $insertStmt = $conn->prepare("INSERT INTO products (barcode,name, stock, image, created_by_id, description,warehouse_id, manufacture, location) VALUES (?, ?, ?, ?,?,?,?,?,?)");
+            $insertStmt->bind_param("ssisisiss", $barcode,$name, $newStock, $imagePath, $createdById, $description, $warehouse_id, $manufacture, $location);
 
             if ($insertStmt->execute()) {
                 $response["message"] = "Product added successfully.";
