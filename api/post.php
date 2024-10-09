@@ -142,6 +142,35 @@ echo json_encode($response);
 
 } // end login
 
+function add_product_movement($conn, $barcode, $user_id, $stock)
+{
+    logToFile("add_product_movement");
+    $stmt3 = $conn->prepare("SELECT id FROM products WHERE barcode = ?");
+    $stmt3->bind_param("s", $barcode);  // Bind the barcode parameter
+    $stmt3->execute();  // Execute the query
+    $stmt3->bind_result($product_id);  // Bind the result to $product_id
+    $stmt3->fetch();  // Fetch the result
+    $stmt3->close();  // Close the statement
+
+    // add to product_movements table
+    $movement_type = "in"; 
+    if($stock>0)
+    {
+        $movement_type = "in";  
+    }
+    else{
+        $movement_type = "out";
+    }
+
+    logToFile("$product_id , $user_id, $movement_type, $stock");
+    
+
+    $stmt2 = $conn->prepare("INSERT INTO product_movements(product_id, user_id, movement_type, quantity) VALUES (?,?,?,?)");
+    $stmt2->bind_param("iisi", $product_id, $user_id, $movement_type, $stock);
+    $stmt2->execute();
+    $stmt2->close();
+}
+
 
 
 
@@ -162,6 +191,7 @@ function addProduct($data, $conn)
     $device   = isset($data['device'])   ? trim($data['device']) : '';
     $token    = isset($data['token'])    ? trim($data['token']) : '';
     $newStock = isset($data['newStock']) ? intval($data['newStock']) : 0;
+    $quantity = isset($data['quantity']) ? intval($data['quantity']) : 0;
     $barcode  = isset($data['barcode'])  ? trim($data['barcode']) : '';
     $image    = isset($_FILES['image'])  ? $_FILES['image'] : null;
 
@@ -243,6 +273,9 @@ function addProduct($data, $conn)
                 $response["message"] = "Product stock updated successfully.";
                 $response["status"] = "success";
                 logToFile("Product stock updated successfully.");
+
+                add_product_movement($conn, $barcode, $_SESSION['user_id'], $quantity);
+
             } else {
                 $response["message"] = "500 Internal Server Error. Failed to update stock.";
                 $response["status"] = "500";
@@ -264,6 +297,7 @@ function addProduct($data, $conn)
                 $response["message"] = "Product added successfully.";
                 $response["status"] = "success";
                 logToFile("Product added successfully.");
+                add_product_movement($conn, $barcode, $_SESSION['user_id'], $quantity);
             } else {
                 $response["message"] = "500 Internal Server Error. Failed to insert new product.";
                 $response["status"] = "500";

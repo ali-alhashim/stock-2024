@@ -204,6 +204,7 @@ class AddFragment : Fragment() {
             val location = RequestBody.create(MediaType.parse("text/plain"), editTextLocation.text.toString())
             val warehouse_id = RequestBody.create(MediaType.parse("text/plain"), spinnerWarehouse.selectedItem.toString())
             val barcode = RequestBody.create(MediaType.parse("text/plain"), editTextBarcode.text.toString())
+            val quantity = RequestBody.create(MediaType.parse("text/plain"), editTextQuantity.text.toString())
 
             // Get the image from ImageView, convert it to a file
             val bitmap = (imageView.drawable as BitmapDrawable).bitmap
@@ -245,7 +246,7 @@ class AddFragment : Fragment() {
             val apiService = retrofit.create(ApiServiceAddProduct::class.java)
 
             // Call the API with the data
-            val call = apiService.addProduct(theUsername, function, device, token, name, theImage, newStock, description, manufacture, location, warehouse_id, barcode)
+            val call = apiService.addProduct(theUsername, function, device, token, name, theImage, newStock, description, manufacture, location, warehouse_id, barcode,quantity)
 
             // Show a loading spinner or progress indicator
             val loadingDialog = ProgressDialog(requireContext())

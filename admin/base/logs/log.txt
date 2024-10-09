@@ -123,3 +123,40 @@
 )
 
 [2024-10-08 22:22:42] Product stock updated successfully.
+[2024-10-09 19:21:43] Login admin From  Device Mobile android 5d1728ab63a61903ae577b438c38a1fcc9e61516b1878fd3a27872c3b7276a47
+[2024-10-09 19:22:08] addProduct called admin with 5d1728ab63a61903ae577b438c38a1fcc9e61516b1878fd3a27872c3b7276a47 | 5d1728ab63a61903ae577b438c38a1fcc9e61516b1878fd3a27872c3b7276a47 POST: 1
+[2024-10-09 19:22:08] Cookies found in the request: Array
+(
+    [PHPSESSID] => 90ng4qcmfsr75ccim3gs86u4u2j7pcggd0ftjeoju4ujg168hlpepsoqche25imk
+)
+
+[2024-10-09 19:22:08] Product stock updated successfully.
+[2024-10-09 20:18:18] Login admin From  Device Mobile android 39770706bd23764eead493b8142308a53db18e64df68dbb09987136e147cd333
+[2024-10-09 20:18:46] addProduct called admin with 39770706bd23764eead493b8142308a53db18e64df68dbb09987136e147cd333 | 39770706bd23764eead493b8142308a53db18e64df68dbb09987136e147cd333 POST: 1
+[2024-10-09 20:18:46] Cookies found in the request: Array
+(
+    [PHPSESSID] => pqjobnobqvm79ggdd18c5o0taq3jfojuufhqs4riarh14i6jd5jfi951aqn586fo
+)
+
+[2024-10-09 20:18:46] Product stock updated successfully.
+[2024-10-09 20:18:46] add_product_movement
+[2024-10-09 20:18:46] 4 , 1, in, 1
+[2024-10-09 20:19:04] addProduct called admin with 39770706bd23764eead493b8142308a53db18e64df68dbb09987136e147cd333 | 39770706bd23764eead493b8142308a53db18e64df68dbb09987136e147cd333 POST: 1
+[2024-10-09 20:19:04] Cookies found in the request: Array
+(
+    [PHPSESSID] => pqjobnobqvm79ggdd18c5o0taq3jfojuufhqs4riarh14i6jd5jfi951aqn586fo
+)
+
+[2024-10-09 20:19:04] Product stock updated successfully.
+[2024-10-09 20:19:04] add_product_movement
+[2024-10-09 20:19:04] 4 , 1, in, 5
+[2024-10-09 20:19:50] Login salma From  Device Mobile android 3b19049f32d75c1c416e52c7d8ff2ce4e1d49431ff7f8c564337691c688d1eee
+[2024-10-09 20:20:09] addProduct called salma with 3b19049f32d75c1c416e52c7d8ff2ce4e1d49431ff7f8c564337691c688d1eee | 3b19049f32d75c1c416e52c7d8ff2ce4e1d49431ff7f8c564337691c688d1eee POST: 1
+[2024-10-09 20:20:09] Cookies found in the request: Array
+(
+    [PHPSESSID] => pqjobnobqvm79ggdd18c5o0taq3jfojuufhqs4riarh14i6jd5jfi951aqn586fo
+)
+
+[2024-10-09 20:20:09] Product stock updated successfully.
+[2024-10-09 20:20:09] add_product_movement
+[2024-10-09 20:20:09] 4 , 3, out, -5

@@ -23,6 +23,7 @@ interface ApiServiceAddProduct {
         @Part("manufacture")manufacture:RequestBody, // manufacture
         @Part("location")location:RequestBody, //location
         @Part("warehouse_id")warehouse_id:RequestBody, //
-        @Part("barcode")barcode:RequestBody
+        @Part("barcode")barcode:RequestBody,
+        @Part("quantity")quantity:RequestBody
     ): Call<AddProductDataClass>
 }
