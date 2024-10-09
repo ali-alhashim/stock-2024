@@ -56,6 +56,7 @@ session_start();
                                               FROM products AS PRODUCTS
                                               JOIN users AS USERS ON PRODUCTS.created_by_id = USERS.id
                                               JOIN warehouse as WAREHOUSE ON PRODUCTS.warehouse_id = WAREHOUSE.id
+                                              order by PRODUCTS.id desc;
                                           ");
                     $stmt->execute();
                     $result = $stmt->get_result();

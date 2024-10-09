@@ -6,6 +6,7 @@ ini_set('session.sid_length', 64);  // 256 characters long
 session_start();
 require('../admin/base/config.php');
 require('../admin/base/logs_func.php');
+require('../admin/base/log_to_file.php');
 
 $conn = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT);
 
@@ -57,8 +58,15 @@ function warehouses($conn, $data)
 
 function getProductByBarcode($conn, $data)
 {
-  $barcode = isset($data['barcode']) ? trim($data['barcode']) : '';
+    // Check if the token is valid
+    
 
+  $barcode = isset($data['barcode']) ? trim($data['barcode']) : '';
+  $token   = isset($data['token'])    ? trim($data['token']) : '';
+
+  logToFile("getProductByBarcode $barcode, $token | ".$_SESSION['token']);
+
+  if ($token == $_SESSION['token']) {
     $stmt = $conn->prepare("SELECT *  FROM products where barcode =?");
     $stmt->bind_param('s', $barcode);
     $stmt->execute();
@@ -75,6 +83,16 @@ function getProductByBarcode($conn, $data)
     echo json_encode($product);
 
     $stmt->close();
+  }
+  else
+  {
+    // you have to login first message
+    header('Content-Type: application/json');
+    echo json_encode(['status' => 'error', 'message' => 'Login First!']);
+
+  }
+
+   
 
 
 }

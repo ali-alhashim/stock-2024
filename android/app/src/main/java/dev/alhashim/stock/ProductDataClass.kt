@@ -16,5 +16,7 @@ data class ProductDataClass(
     val sale_price:String,
     val created_by_id:Int,
     val created_at:String,
-    val category_id:String?
+    val category_id:String?,
+    val message:String,
+    val status: String,
 )

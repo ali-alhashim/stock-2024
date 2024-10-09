@@ -160,3 +160,39 @@
 [2024-10-09 20:20:09] Product stock updated successfully.
 [2024-10-09 20:20:09] add_product_movement
 [2024-10-09 20:20:09] 4 , 3, out, -5
+[2024-10-09 20:44:14] Login salma From  Device Mobile android f713e2f6fbd002f42eccc133896953fbba78cac3cc4866fef702692e30ff3905
+[2024-10-09 20:44:18] getProductByBarcode 9786038411353, f713e2f6fbd002f42eccc133896953fbba78cac3cc4866fef702692e30ff3905 | f713e2f6fbd002f42eccc133896953fbba78cac3cc4866fef702692e30ff3905
+[2024-10-09 20:45:18] addProduct called salma with f713e2f6fbd002f42eccc133896953fbba78cac3cc4866fef702692e30ff3905 | f713e2f6fbd002f42eccc133896953fbba78cac3cc4866fef702692e30ff3905 POST: 1
+[2024-10-09 20:45:18] Cookies found in the request: Array
+(
+    [PHPSESSID] => t92fk74iapgmkk3gt3r7ingakh2tfeckak5norrmh0o18lbo24k8t8ls8cugam55
+)
+
+[2024-10-09 20:45:18] Product does not exist, insert a new row
+[2024-10-09 20:45:18] INSERT INTO products 9786038411353, كتاب رواية الانتهازية, 1, 9786038411353.jpg, 3, رواية خيالية تأليف أسامة المسلم, 1, جرير, الدمام الدور الثاني
+[2024-10-09 20:45:18] Product added successfully.
+[2024-10-09 20:45:18] add_product_movement
+[2024-10-09 20:45:18] 5 , 3, in, 1
+[2024-10-09 20:45:18] getProductByBarcode okhttp3.RequestBody$2@3444f4a, f713e2f6fbd002f42eccc133896953fbba78cac3cc4866fef702692e30ff3905 | f713e2f6fbd002f42eccc133896953fbba78cac3cc4866fef702692e30ff3905
+[2024-10-09 20:47:42] getProductByBarcode 9786038411353, f713e2f6fbd002f42eccc133896953fbba78cac3cc4866fef702692e30ff3905 | f713e2f6fbd002f42eccc133896953fbba78cac3cc4866fef702692e30ff3905
+[2024-10-09 20:48:00] getProductByBarcode 9786038411353, f713e2f6fbd002f42eccc133896953fbba78cac3cc4866fef702692e30ff3905 | 
+[2024-10-09 20:55:24] getProductByBarcode 9786038411353, f713e2f6fbd002f42eccc133896953fbba78cac3cc4866fef702692e30ff3905 | 
+[2024-10-09 20:55:29] getProductByBarcode 9786038411353, f713e2f6fbd002f42eccc133896953fbba78cac3cc4866fef702692e30ff3905 | 
+[2024-10-09 20:55:35] getProductByBarcode 9786038411353, f713e2f6fbd002f42eccc133896953fbba78cac3cc4866fef702692e30ff3905 | 
+[2024-10-09 20:58:08] getProductByBarcode https://adab-book.com/, f713e2f6fbd002f42eccc133896953fbba78cac3cc4866fef702692e30ff3905 | 
+[2024-10-09 20:58:11] getProductByBarcode 9786038411353, f713e2f6fbd002f42eccc133896953fbba78cac3cc4866fef702692e30ff3905 | 
+[2024-10-09 20:58:13] getProductByBarcode https://adab-book.com/, f713e2f6fbd002f42eccc133896953fbba78cac3cc4866fef702692e30ff3905 | 
+[2024-10-09 20:58:15] getProductByBarcode https://adab-book.com/, f713e2f6fbd002f42eccc133896953fbba78cac3cc4866fef702692e30ff3905 | 
+[2024-10-09 20:58:18] getProductByBarcode 9786038411353, f713e2f6fbd002f42eccc133896953fbba78cac3cc4866fef702692e30ff3905 | 
+[2024-10-09 20:58:30] Login salma From  Device Mobile android 0b5ef380e737a3c50da747da6bb7be50aaa6d7257a00b645bf00dcb29650cf9e
+[2024-10-09 20:58:33] getProductByBarcode 9786038411353, 0b5ef380e737a3c50da747da6bb7be50aaa6d7257a00b645bf00dcb29650cf9e | 0b5ef380e737a3c50da747da6bb7be50aaa6d7257a00b645bf00dcb29650cf9e
+[2024-10-09 20:58:45] addProduct called salma with 0b5ef380e737a3c50da747da6bb7be50aaa6d7257a00b645bf00dcb29650cf9e | 0b5ef380e737a3c50da747da6bb7be50aaa6d7257a00b645bf00dcb29650cf9e POST: 1
+[2024-10-09 20:58:45] Cookies found in the request: Array
+(
+    [PHPSESSID] => 4obki5r5rtumkoc3962eqjfrjgo7u4o42us7odi0ul0l2qrcddsvpjv0ss5cvhah
+)
+
+[2024-10-09 20:58:45] Product stock updated successfully.
+[2024-10-09 20:58:45] add_product_movement
+[2024-10-09 20:58:45] 5 , 3, in, 20
+[2024-10-09 20:58:45] getProductByBarcode okhttp3.RequestBody$2@b4bc444, 0b5ef380e737a3c50da747da6bb7be50aaa6d7257a00b645bf00dcb29650cf9e | 0b5ef380e737a3c50da747da6bb7be50aaa6d7257a00b645bf00dcb29650cf9e

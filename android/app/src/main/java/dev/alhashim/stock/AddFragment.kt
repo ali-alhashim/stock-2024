@@ -411,9 +411,13 @@ class AddFragment : Fragment() {
 
         //-------------send get request for product with barcode
         // Create Retrofit instance
+        val okHttpClient = OkHttpClient.Builder()
+            .cookieJar(CookieManager.cookieJar) // Use your custom CookieJar
+            .build()
 
         val apiGetProductByBarcode = Retrofit.Builder()
             .baseUrl(savedServerURL)
+            .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(ApiServiceProduct::class.java)
@@ -426,6 +430,10 @@ class AddFragment : Fragment() {
                 response: retrofit2.Response<List<ProductDataClass>>
             ) {
                 progressBar.visibility = View.GONE
+
+
+
+
 
                 if (response.isSuccessful && response.body() != null) {
                     Log.d(TAG, "HTTP GET request is successful for Product")
@@ -442,6 +450,8 @@ class AddFragment : Fragment() {
 
                             val imageUrl = savedServerURL +"static/img/uploads/"+ product.image
                             Glide.with(requireActivity()).load(imageUrl).into(imageView)
+
+
 
 
                         }
