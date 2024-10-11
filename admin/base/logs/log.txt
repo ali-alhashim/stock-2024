@@ -196,3 +196,4 @@
 [2024-10-09 20:58:45] add_product_movement
 [2024-10-09 20:58:45] 5 , 3, in, 20
 [2024-10-09 20:58:45] getProductByBarcode okhttp3.RequestBody$2@b4bc444, 0b5ef380e737a3c50da747da6bb7be50aaa6d7257a00b645bf00dcb29650cf9e | 0b5ef380e737a3c50da747da6bb7be50aaa6d7257a00b645bf00dcb29650cf9e
+[2024-10-11 13:00:23] Login salma From  Device Mobile android f5ea3b5faa7186d7845dfb66cc8ed07db2031709c2acc9f490a24ae06f54a577

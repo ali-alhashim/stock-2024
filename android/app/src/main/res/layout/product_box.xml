@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@color/Beige"
+    android:layout_margin="10dp"
+    android:id="@+id/ProductLayoutBox"
+    android:padding="8dp">
+
+
+    <ImageView
+        android:scaleType="fitCenter"
+        android:id="@+id/productImage"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_margin="5dp"
+        android:background="@color/gold"
+        />
+
+
+
+    <LinearLayout
+        android:padding="8dp"
+        android:id="@+id/productTextLayout"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/productNameTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="Product Name"
+            android:textColor="@color/black"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:id="@+id/descriptionTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:text="Product Description"
+            android:textColor="@color/black"
+            android:textStyle="normal" />
+
+
+        <TableLayout
+            android:layout_marginTop="14dp"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <TableRow>
+
+
+                <TextView
+                    android:id="@+id/productLocationTextView"
+                    android:padding="5dp"
+                    android:textColor="@color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="10dp"
+                    android:text="Location: Shelf A Level 4"
+                    android:textStyle="normal" />
+            </TableRow>
+            <TableRow>
+
+
+                <TextView
+                    android:id="@+id/productQuantityTextView"
+                    android:padding="5dp"
+                    android:textColor="@color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAlignment="textStart"
+                    android:textSize="10dp"
+                    android:text="Quantity: 5"
+                    android:textStyle="normal" />
+            </TableRow>
+
+            <TableRow>
+
+
+                <TextView
+                    android:id="@+id/warehouseTextView"
+                    android:padding="5dp"
+                    android:textColor="@color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="9dp"
+                    android:text="Warehouse:  Dammam warehouse"
+                    android:textStyle="normal" />
+            </TableRow>
+
+
+
+        </TableLayout>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
