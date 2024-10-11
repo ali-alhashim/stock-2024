@@ -185,7 +185,7 @@ function addProduct($data, $conn)
     $description = isset($data['description']) ? trim($data['description']) : '';
     $manufacture = isset($data['manufacture']) ? trim($data['manufacture']) : '';
     $location = isset($data['location']) ? trim($data['location']) : '';
-
+    $warehouseName = isset($data['warehouse_id']) ? trim($data['warehouse_id']) : '';
     $name = isset($data['name']) ? trim($data['name']) : '';
     $username = isset($data['username']) ? trim($data['username']) : '';
     $device   = isset($data['device'])   ? trim($data['device']) : '';
@@ -198,6 +198,10 @@ function addProduct($data, $conn)
     logToFile("addProduct called ".$username . " with " . $token . " | ".$_SESSION['token']. " POST: ".print_r($data));
     logToFile("Cookies found in the request: " . print_r($_COOKIE, true));
 
+    $warehouseID = getWarehouseIDByName($conn, $warehouseName);
+    logToFile("Data to warehouse:  $warehouseName => $warehouseID");
+    
+   
     // Initialize response data
     $response = [
         'message' => '',
@@ -285,7 +289,7 @@ function addProduct($data, $conn)
         } else {
             // Product does not exist, insert a new row
             $createdById = $_SESSION['user_id'];
-            $warehouse_id = 1; // this must be received from android app
+            $warehouse_id = $warehouseID;
 
             logToFile("Product does not exist, insert a new row");
             logToFile("INSERT INTO products $barcode, $name, $newStock, $imagePath, $createdById, $description, $warehouse_id, $manufacture, $location");
@@ -316,6 +320,22 @@ function addProduct($data, $conn)
     // Return response as JSON
     header('Content-Type: application/json');
     echo json_encode($response);
+}
+
+
+function getWarehouseIDByName($conn, $warehouseName)
+{
+    $warehouseID = 0;
+    
+    $stmt3 = $conn->prepare("SELECT id FROM warehouse WHERE name = ?");
+    $stmt3->bind_param("s", $warehouseName);  
+    $stmt3->execute();  
+    $stmt3->bind_result($warehouseID); 
+    $stmt3->fetch();  
+    $stmt3->close();  
+
+
+    return $warehouseID;
 }
 
 

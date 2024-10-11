@@ -120,6 +120,7 @@ function getProductList($conn, $data)
     $stmt = $conn->prepare("SELECT PRODUCT.*, WH.name AS warehouse
                             FROM stockdb.products PRODUCT
                             JOIN stockdb.warehouse WH ON WH.id = PRODUCT.warehouse_id
+                            order by PRODUCT.id desc
                             LIMIT 10 OFFSET ?;");
     $stmt->bind_param("i", $startFrom); // Bind offset as integer
     $stmt->execute();

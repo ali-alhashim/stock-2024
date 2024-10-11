@@ -1,266 +1,42 @@
-[2024-10-08 21:45:03] addProduct called admin with 199a57f6143c9c57a149ec333e0fc0a9ec4a6550f07f84f9ebc681ae82519265 | 199a57f6143c9c57a149ec333e0fc0a9ec4a6550f07f84f9ebc681ae82519265 POST: 1
-[2024-10-08 21:45:03] Cookies found in the request: Array
+[2024-10-12 00:05:46] Login salma From  Device Mobile android f675b80af7e24bf3951f26cc70b10ff3ecf1bb04c03ea31bb11ffaf877e11f90
+[2024-10-12 00:05:50] getProductByBarcode 6281035000034, f675b80af7e24bf3951f26cc70b10ff3ecf1bb04c03ea31bb11ffaf877e11f90 | f675b80af7e24bf3951f26cc70b10ff3ecf1bb04c03ea31bb11ffaf877e11f90
+[2024-10-12 00:07:14] addProduct called salma with f675b80af7e24bf3951f26cc70b10ff3ecf1bb04c03ea31bb11ffaf877e11f90 | f675b80af7e24bf3951f26cc70b10ff3ecf1bb04c03ea31bb11ffaf877e11f90 POST: 1
+[2024-10-12 00:07:14] Cookies found in the request: Array
 (
-    [PHPSESSID] => em2r55gjkqnr518tb4redulb6c30elg5pbf3rbmnd94urq4g8f63b3vfg83h96m3
+    [PHPSESSID] => pbr5bm6fgq3o647planh2155jnubgf7cejilhg2geei9hs0m6of374fnh58qrqbp
 )
 
-[2024-10-08 21:45:48] addProduct called admin with 199a57f6143c9c57a149ec333e0fc0a9ec4a6550f07f84f9ebc681ae82519265 | 199a57f6143c9c57a149ec333e0fc0a9ec4a6550f07f84f9ebc681ae82519265 POST: 1
-[2024-10-08 21:45:48] Cookies found in the request: Array
+[2024-10-12 00:07:14] Data to warehouse:  Dammam WH-1
+[2024-10-12 00:07:14] Product does not exist, insert a new row
+[2024-10-12 00:07:14] INSERT INTO products 6281035000034, nova water, 40, 6281035000034.jpg, 3, nova water 0,33 L, 1, nova, home shelf level 6
+[2024-10-12 00:07:14] Product added successfully.
+[2024-10-12 00:07:14] add_product_movement
+[2024-10-12 00:07:14] 7 , 3, in, 40
+[2024-10-12 00:07:14] getProductByBarcode okhttp3.RequestBody$2@bf030a0, f675b80af7e24bf3951f26cc70b10ff3ecf1bb04c03ea31bb11ffaf877e11f90 | f675b80af7e24bf3951f26cc70b10ff3ecf1bb04c03ea31bb11ffaf877e11f90
+[2024-10-12 00:07:16] getProductList....
+[2024-10-12 00:07:16] getProductList....start from row#:  0
+[2024-10-12 00:07:16] the size of products is : 6
+[2024-10-12 00:15:55] Login salma From  Device Mobile android 0308005d77fa247481b22ac68379783fcaaa1243bbe18966d6a1a3e097911485
+[2024-10-12 00:15:58] getProductByBarcode 6291109626237, 0308005d77fa247481b22ac68379783fcaaa1243bbe18966d6a1a3e097911485 | 0308005d77fa247481b22ac68379783fcaaa1243bbe18966d6a1a3e097911485
+[2024-10-12 00:16:58] addProduct called salma with 0308005d77fa247481b22ac68379783fcaaa1243bbe18966d6a1a3e097911485 | 0308005d77fa247481b22ac68379783fcaaa1243bbe18966d6a1a3e097911485 POST: 1
+[2024-10-12 00:16:58] Cookies found in the request: Array
 (
-    [PHPSESSID] => em2r55gjkqnr518tb4redulb6c30elg5pbf3rbmnd94urq4g8f63b3vfg83h96m3
+    [PHPSESSID] => pbr5bm6fgq3o647planh2155jnubgf7cejilhg2geei9hs0m6of374fnh58qrqbp
 )
 
-[2024-10-08 21:45:48] Product does not exist, insert a new row
-[2024-10-08 21:48:31] addProduct called admin with 199a57f6143c9c57a149ec333e0fc0a9ec4a6550f07f84f9ebc681ae82519265 | 199a57f6143c9c57a149ec333e0fc0a9ec4a6550f07f84f9ebc681ae82519265 POST: 1
-[2024-10-08 21:48:31] Cookies found in the request: Array
-(
-    [PHPSESSID] => em2r55gjkqnr518tb4redulb6c30elg5pbf3rbmnd94urq4g8f63b3vfg83h96m3
-)
-
-[2024-10-08 21:48:31] Product does not exist, insert a new row
-[2024-10-08 21:51:08] addProduct called admin with 199a57f6143c9c57a149ec333e0fc0a9ec4a6550f07f84f9ebc681ae82519265 | 199a57f6143c9c57a149ec333e0fc0a9ec4a6550f07f84f9ebc681ae82519265 POST: 1
-[2024-10-08 21:51:08] Cookies found in the request: Array
-(
-    [PHPSESSID] => em2r55gjkqnr518tb4redulb6c30elg5pbf3rbmnd94urq4g8f63b3vfg83h96m3
-)
-
-[2024-10-08 21:51:08] Product does not exist, insert a new row
-[2024-10-08 21:53:04] addProduct called admin with 199a57f6143c9c57a149ec333e0fc0a9ec4a6550f07f84f9ebc681ae82519265 | 199a57f6143c9c57a149ec333e0fc0a9ec4a6550f07f84f9ebc681ae82519265 POST: 1
-[2024-10-08 21:53:04] Cookies found in the request: Array
-(
-    [PHPSESSID] => em2r55gjkqnr518tb4redulb6c30elg5pbf3rbmnd94urq4g8f63b3vfg83h96m3
-)
-
-[2024-10-08 21:53:04] Product does not exist, insert a new row
-[2024-10-08 21:53:09] addProduct called admin with 199a57f6143c9c57a149ec333e0fc0a9ec4a6550f07f84f9ebc681ae82519265 | 199a57f6143c9c57a149ec333e0fc0a9ec4a6550f07f84f9ebc681ae82519265 POST: 1
-[2024-10-08 21:53:09] Cookies found in the request: Array
-(
-    [PHPSESSID] => em2r55gjkqnr518tb4redulb6c30elg5pbf3rbmnd94urq4g8f63b3vfg83h96m3
-)
-
-[2024-10-08 21:53:09] Product does not exist, insert a new row
-[2024-10-08 21:55:09] addProduct called admin with 199a57f6143c9c57a149ec333e0fc0a9ec4a6550f07f84f9ebc681ae82519265 | 199a57f6143c9c57a149ec333e0fc0a9ec4a6550f07f84f9ebc681ae82519265 POST: 1
-[2024-10-08 21:55:09] Cookies found in the request: Array
-(
-    [PHPSESSID] => em2r55gjkqnr518tb4redulb6c30elg5pbf3rbmnd94urq4g8f63b3vfg83h96m3
-)
-
-[2024-10-08 21:55:09] Product does not exist, insert a new row
-[2024-10-08 21:55:09] INSERT INTO products 9781642743326, comptia security, 1, /static/img/uploads/9781642743326.jpg, , book for comptia security+, 
-[2024-10-08 21:57:19] addProduct called admin with 199a57f6143c9c57a149ec333e0fc0a9ec4a6550f07f84f9ebc681ae82519265 | 199a57f6143c9c57a149ec333e0fc0a9ec4a6550f07f84f9ebc681ae82519265 POST: 1
-[2024-10-08 21:57:19] Cookies found in the request: Array
-(
-    [PHPSESSID] => em2r55gjkqnr518tb4redulb6c30elg5pbf3rbmnd94urq4g8f63b3vfg83h96m3
-)
-
-[2024-10-08 21:57:19] Product does not exist, insert a new row
-[2024-10-08 21:57:19] INSERT INTO products 9781642743326, comptia security, 1, /static/img/uploads/9781642743326.jpg, , book for comptia security+, 
-[2024-10-08 22:04:16] addProduct called admin with 199a57f6143c9c57a149ec333e0fc0a9ec4a6550f07f84f9ebc681ae82519265 | 199a57f6143c9c57a149ec333e0fc0a9ec4a6550f07f84f9ebc681ae82519265 POST: 1
-[2024-10-08 22:04:16] Cookies found in the request: Array
-(
-    [PHPSESSID] => em2r55gjkqnr518tb4redulb6c30elg5pbf3rbmnd94urq4g8f63b3vfg83h96m3
-)
-
-[2024-10-08 22:04:16] Product does not exist, insert a new row
-[2024-10-08 22:04:16] INSERT INTO products 9781642743326, comptia security, 1, /static/img/uploads/9781642743326.jpg, 1, book for comptia security+, 1
-[2024-10-08 22:05:35] addProduct called admin with 199a57f6143c9c57a149ec333e0fc0a9ec4a6550f07f84f9ebc681ae82519265 | 199a57f6143c9c57a149ec333e0fc0a9ec4a6550f07f84f9ebc681ae82519265 POST: 1
-[2024-10-08 22:05:35] Cookies found in the request: Array
-(
-    [PHPSESSID] => em2r55gjkqnr518tb4redulb6c30elg5pbf3rbmnd94urq4g8f63b3vfg83h96m3
-)
-
-[2024-10-08 22:05:35] Product does not exist, insert a new row
-[2024-10-08 22:05:35] INSERT INTO products 9781642743326, comptia security, 1, /static/img/uploads/9781642743326.jpg, 1, book for comptia security+, 1
-[2024-10-08 22:05:35] Product added successfully.
-[2024-10-08 22:07:08] addProduct called admin with 199a57f6143c9c57a149ec333e0fc0a9ec4a6550f07f84f9ebc681ae82519265 | 199a57f6143c9c57a149ec333e0fc0a9ec4a6550f07f84f9ebc681ae82519265 POST: 1
-[2024-10-08 22:07:08] Cookies found in the request: Array
-(
-    [PHPSESSID] => em2r55gjkqnr518tb4redulb6c30elg5pbf3rbmnd94urq4g8f63b3vfg83h96m3
-)
-
-[2024-10-08 22:07:08] Product stock updated successfully.
-[2024-10-08 22:07:26] addProduct called admin with 199a57f6143c9c57a149ec333e0fc0a9ec4a6550f07f84f9ebc681ae82519265 | 199a57f6143c9c57a149ec333e0fc0a9ec4a6550f07f84f9ebc681ae82519265 POST: 1
-[2024-10-08 22:07:26] Cookies found in the request: Array
-(
-    [PHPSESSID] => em2r55gjkqnr518tb4redulb6c30elg5pbf3rbmnd94urq4g8f63b3vfg83h96m3
-)
-
-[2024-10-08 22:07:26] Product stock updated successfully.
-[2024-10-08 22:08:01] addProduct called admin with 199a57f6143c9c57a149ec333e0fc0a9ec4a6550f07f84f9ebc681ae82519265 | 199a57f6143c9c57a149ec333e0fc0a9ec4a6550f07f84f9ebc681ae82519265 POST: 1
-[2024-10-08 22:08:01] Cookies found in the request: Array
-(
-    [PHPSESSID] => em2r55gjkqnr518tb4redulb6c30elg5pbf3rbmnd94urq4g8f63b3vfg83h96m3
-)
-
-[2024-10-08 22:08:01] Product does not exist, insert a new row
-[2024-10-08 22:08:01] INSERT INTO products 9781642743326, comptia security, 1, 9781642743326.jpg, 1, book for comptia security+, 1
-[2024-10-08 22:08:01] Product added successfully.
-[2024-10-08 22:10:28] addProduct called admin with 199a57f6143c9c57a149ec333e0fc0a9ec4a6550f07f84f9ebc681ae82519265 | 199a57f6143c9c57a149ec333e0fc0a9ec4a6550f07f84f9ebc681ae82519265 POST: 1
-[2024-10-08 22:10:28] Cookies found in the request: Array
-(
-    [PHPSESSID] => em2r55gjkqnr518tb4redulb6c30elg5pbf3rbmnd94urq4g8f63b3vfg83h96m3
-)
-
-[2024-10-08 22:10:28] Product stock updated successfully.
-[2024-10-08 22:17:30] addProduct called admin with 199a57f6143c9c57a149ec333e0fc0a9ec4a6550f07f84f9ebc681ae82519265 |  POST: 1
-[2024-10-08 22:17:30] Cookies found in the request: Array
-(
-)
-
-[2024-10-08 22:17:30] 403 Forbidden. Invalid token, login required.
-[2024-10-08 22:17:46] addProduct called admin with 199a57f6143c9c57a149ec333e0fc0a9ec4a6550f07f84f9ebc681ae82519265 |  POST: 1
-[2024-10-08 22:17:46] Cookies found in the request: Array
-(
-    [PHPSESSID] => b4m9hi7cp5cfo3s6ivfjdt2645a5ti07eeu328ci9prdi7ap69u47c7au60n4v9l
-)
-
-[2024-10-08 22:17:46] 403 Forbidden. Invalid token, login required.
-[2024-10-08 22:22:23] Login admin From  Device Mobile android 9c36fae0d789207fb2b5d52dfca1906f23222e3b6ee144c57b1a5b3e85e83e54
-[2024-10-08 22:22:42] addProduct called admin with 9c36fae0d789207fb2b5d52dfca1906f23222e3b6ee144c57b1a5b3e85e83e54 | 9c36fae0d789207fb2b5d52dfca1906f23222e3b6ee144c57b1a5b3e85e83e54 POST: 1
-[2024-10-08 22:22:42] Cookies found in the request: Array
-(
-    [PHPSESSID] => b4m9hi7cp5cfo3s6ivfjdt2645a5ti07eeu328ci9prdi7ap69u47c7au60n4v9l
-)
-
-[2024-10-08 22:22:42] Product stock updated successfully.
-[2024-10-09 19:21:43] Login admin From  Device Mobile android 5d1728ab63a61903ae577b438c38a1fcc9e61516b1878fd3a27872c3b7276a47
-[2024-10-09 19:22:08] addProduct called admin with 5d1728ab63a61903ae577b438c38a1fcc9e61516b1878fd3a27872c3b7276a47 | 5d1728ab63a61903ae577b438c38a1fcc9e61516b1878fd3a27872c3b7276a47 POST: 1
-[2024-10-09 19:22:08] Cookies found in the request: Array
-(
-    [PHPSESSID] => 90ng4qcmfsr75ccim3gs86u4u2j7pcggd0ftjeoju4ujg168hlpepsoqche25imk
-)
-
-[2024-10-09 19:22:08] Product stock updated successfully.
-[2024-10-09 20:18:18] Login admin From  Device Mobile android 39770706bd23764eead493b8142308a53db18e64df68dbb09987136e147cd333
-[2024-10-09 20:18:46] addProduct called admin with 39770706bd23764eead493b8142308a53db18e64df68dbb09987136e147cd333 | 39770706bd23764eead493b8142308a53db18e64df68dbb09987136e147cd333 POST: 1
-[2024-10-09 20:18:46] Cookies found in the request: Array
-(
-    [PHPSESSID] => pqjobnobqvm79ggdd18c5o0taq3jfojuufhqs4riarh14i6jd5jfi951aqn586fo
-)
-
-[2024-10-09 20:18:46] Product stock updated successfully.
-[2024-10-09 20:18:46] add_product_movement
-[2024-10-09 20:18:46] 4 , 1, in, 1
-[2024-10-09 20:19:04] addProduct called admin with 39770706bd23764eead493b8142308a53db18e64df68dbb09987136e147cd333 | 39770706bd23764eead493b8142308a53db18e64df68dbb09987136e147cd333 POST: 1
-[2024-10-09 20:19:04] Cookies found in the request: Array
-(
-    [PHPSESSID] => pqjobnobqvm79ggdd18c5o0taq3jfojuufhqs4riarh14i6jd5jfi951aqn586fo
-)
-
-[2024-10-09 20:19:04] Product stock updated successfully.
-[2024-10-09 20:19:04] add_product_movement
-[2024-10-09 20:19:04] 4 , 1, in, 5
-[2024-10-09 20:19:50] Login salma From  Device Mobile android 3b19049f32d75c1c416e52c7d8ff2ce4e1d49431ff7f8c564337691c688d1eee
-[2024-10-09 20:20:09] addProduct called salma with 3b19049f32d75c1c416e52c7d8ff2ce4e1d49431ff7f8c564337691c688d1eee | 3b19049f32d75c1c416e52c7d8ff2ce4e1d49431ff7f8c564337691c688d1eee POST: 1
-[2024-10-09 20:20:09] Cookies found in the request: Array
-(
-    [PHPSESSID] => pqjobnobqvm79ggdd18c5o0taq3jfojuufhqs4riarh14i6jd5jfi951aqn586fo
-)
-
-[2024-10-09 20:20:09] Product stock updated successfully.
-[2024-10-09 20:20:09] add_product_movement
-[2024-10-09 20:20:09] 4 , 3, out, -5
-[2024-10-09 20:44:14] Login salma From  Device Mobile android f713e2f6fbd002f42eccc133896953fbba78cac3cc4866fef702692e30ff3905
-[2024-10-09 20:44:18] getProductByBarcode 9786038411353, f713e2f6fbd002f42eccc133896953fbba78cac3cc4866fef702692e30ff3905 | f713e2f6fbd002f42eccc133896953fbba78cac3cc4866fef702692e30ff3905
-[2024-10-09 20:45:18] addProduct called salma with f713e2f6fbd002f42eccc133896953fbba78cac3cc4866fef702692e30ff3905 | f713e2f6fbd002f42eccc133896953fbba78cac3cc4866fef702692e30ff3905 POST: 1
-[2024-10-09 20:45:18] Cookies found in the request: Array
-(
-    [PHPSESSID] => t92fk74iapgmkk3gt3r7ingakh2tfeckak5norrmh0o18lbo24k8t8ls8cugam55
-)
-
-[2024-10-09 20:45:18] Product does not exist, insert a new row
-[2024-10-09 20:45:18] INSERT INTO products 9786038411353, كتاب رواية الانتهازية, 1, 9786038411353.jpg, 3, رواية خيالية تأليف أسامة المسلم, 1, جرير, الدمام الدور الثاني
-[2024-10-09 20:45:18] Product added successfully.
-[2024-10-09 20:45:18] add_product_movement
-[2024-10-09 20:45:18] 5 , 3, in, 1
-[2024-10-09 20:45:18] getProductByBarcode okhttp3.RequestBody$2@3444f4a, f713e2f6fbd002f42eccc133896953fbba78cac3cc4866fef702692e30ff3905 | f713e2f6fbd002f42eccc133896953fbba78cac3cc4866fef702692e30ff3905
-[2024-10-09 20:47:42] getProductByBarcode 9786038411353, f713e2f6fbd002f42eccc133896953fbba78cac3cc4866fef702692e30ff3905 | f713e2f6fbd002f42eccc133896953fbba78cac3cc4866fef702692e30ff3905
-[2024-10-09 20:48:00] getProductByBarcode 9786038411353, f713e2f6fbd002f42eccc133896953fbba78cac3cc4866fef702692e30ff3905 | 
-[2024-10-09 20:55:24] getProductByBarcode 9786038411353, f713e2f6fbd002f42eccc133896953fbba78cac3cc4866fef702692e30ff3905 | 
-[2024-10-09 20:55:29] getProductByBarcode 9786038411353, f713e2f6fbd002f42eccc133896953fbba78cac3cc4866fef702692e30ff3905 | 
-[2024-10-09 20:55:35] getProductByBarcode 9786038411353, f713e2f6fbd002f42eccc133896953fbba78cac3cc4866fef702692e30ff3905 | 
-[2024-10-09 20:58:08] getProductByBarcode https://adab-book.com/, f713e2f6fbd002f42eccc133896953fbba78cac3cc4866fef702692e30ff3905 | 
-[2024-10-09 20:58:11] getProductByBarcode 9786038411353, f713e2f6fbd002f42eccc133896953fbba78cac3cc4866fef702692e30ff3905 | 
-[2024-10-09 20:58:13] getProductByBarcode https://adab-book.com/, f713e2f6fbd002f42eccc133896953fbba78cac3cc4866fef702692e30ff3905 | 
-[2024-10-09 20:58:15] getProductByBarcode https://adab-book.com/, f713e2f6fbd002f42eccc133896953fbba78cac3cc4866fef702692e30ff3905 | 
-[2024-10-09 20:58:18] getProductByBarcode 9786038411353, f713e2f6fbd002f42eccc133896953fbba78cac3cc4866fef702692e30ff3905 | 
-[2024-10-09 20:58:30] Login salma From  Device Mobile android 0b5ef380e737a3c50da747da6bb7be50aaa6d7257a00b645bf00dcb29650cf9e
-[2024-10-09 20:58:33] getProductByBarcode 9786038411353, 0b5ef380e737a3c50da747da6bb7be50aaa6d7257a00b645bf00dcb29650cf9e | 0b5ef380e737a3c50da747da6bb7be50aaa6d7257a00b645bf00dcb29650cf9e
-[2024-10-09 20:58:45] addProduct called salma with 0b5ef380e737a3c50da747da6bb7be50aaa6d7257a00b645bf00dcb29650cf9e | 0b5ef380e737a3c50da747da6bb7be50aaa6d7257a00b645bf00dcb29650cf9e POST: 1
-[2024-10-09 20:58:45] Cookies found in the request: Array
-(
-    [PHPSESSID] => 4obki5r5rtumkoc3962eqjfrjgo7u4o42us7odi0ul0l2qrcddsvpjv0ss5cvhah
-)
-
-[2024-10-09 20:58:45] Product stock updated successfully.
-[2024-10-09 20:58:45] add_product_movement
-[2024-10-09 20:58:45] 5 , 3, in, 20
-[2024-10-09 20:58:45] getProductByBarcode okhttp3.RequestBody$2@b4bc444, 0b5ef380e737a3c50da747da6bb7be50aaa6d7257a00b645bf00dcb29650cf9e | 0b5ef380e737a3c50da747da6bb7be50aaa6d7257a00b645bf00dcb29650cf9e
-[2024-10-11 13:00:23] Login salma From  Device Mobile android f5ea3b5faa7186d7845dfb66cc8ed07db2031709c2acc9f490a24ae06f54a577
-[2024-10-11 23:07:25] Login salma From  Device Mobile android 59c230f1eae5ccdaaa21771f4ed5f7e752d50b720b498143b3cb0e50d9d7aecb
-[2024-10-11 23:07:27] getProductList....
-[2024-10-11 23:07:27] getProductList....start from row#:  0
-[2024-10-11 23:08:21] getProductList....
-[2024-10-11 23:08:21] getProductList....start from row#:  0
-[2024-10-11 23:13:32] getProductList....
-[2024-10-11 23:13:32] getProductList you have to login first message
-[2024-10-11 23:13:40] Login salma From  Device Mobile android a86737b5cc83f46b62e3f7178042ca961a78b807d6a4a358fded5f77649697f4
-[2024-10-11 23:13:41] getProductList....
-[2024-10-11 23:13:41] getProductList....start from row#:  0
-[2024-10-11 23:13:52] getProductList....
-[2024-10-11 23:13:52] getProductList....start from row#:  0
-[2024-10-11 23:18:15] Login salma From  Device Mobile android 211bd9d527023b98d1e8ec38409a6b596f96efc4b3903dee9c4316d40bc2f1b0
-[2024-10-11 23:18:17] getProductList....
-[2024-10-11 23:18:17] getProductList....start from row#:  0
-[2024-10-11 23:20:15] getProductList....
-[2024-10-11 23:20:15] getProductList....start from row#:  0
-[2024-10-11 23:20:15] the size of products is : 4
-[2024-10-11 23:24:11] Login salma From  Device Mobile android 4bd662b5bbc15126a9fa34291b61fb9f74f70a8b0330105eb98ad1658449b692
-[2024-10-11 23:24:12] getProductList....
-[2024-10-11 23:24:12] getProductList....start from row#:  0
-[2024-10-11 23:24:12] the size of products is : 4
-[2024-10-11 23:24:44] getProductList....
-[2024-10-11 23:24:44] getProductList....start from row#:  0
-[2024-10-11 23:24:44] the size of products is : 4
-[2024-10-11 23:26:47] Login salma From  Device Mobile android dd8c728835b3511441ad340aa66b2164ee8c73b10a78843c73ce6354ec3b6c61
-[2024-10-11 23:26:48] getProductList....
-[2024-10-11 23:26:48] getProductList....start from row#:  0
-[2024-10-11 23:26:48] the size of products is : 4
-[2024-10-11 23:27:02] getProductList....
-[2024-10-11 23:27:02] getProductList....start from row#:  0
-[2024-10-11 23:27:02] the size of products is : 4
-[2024-10-11 23:28:34] getProductList....
-[2024-10-11 23:28:34] getProductList....start from row#:  0
-[2024-10-11 23:28:34] the size of products is : 4
-[2024-10-11 23:38:50] Login salma From  Device Mobile android 9d8a7dc6eed6b52cd8efd5fef4374f1fba7dcfdc0f79f10af9ca6ef8980d452b
-[2024-10-11 23:38:51] getProductList....
-[2024-10-11 23:38:51] getProductList....start from row#:  0
-[2024-10-11 23:38:51] the size of products is : 4
-[2024-10-11 23:41:06] Login salma From  Device Mobile android c164459a279eab845732fbb8c5dd05a1e0033494b6f5a8facb0e85c1028a7287
-[2024-10-11 23:41:08] getProductList....
-[2024-10-11 23:41:08] getProductList....start from row#:  0
-[2024-10-11 23:41:08] the size of products is : 4
-[2024-10-11 23:46:35] Login salma From  Device Mobile android ff24a275fd4b6234f792da9266ac3cf627e248c31d7371a153030080c36c2ed0
-[2024-10-11 23:46:36] getProductList....
-[2024-10-11 23:46:36] getProductList....start from row#:  0
-[2024-10-11 23:46:36] the size of products is : 4
-[2024-10-11 23:48:11] getProductByBarcode 6281101542741, ff24a275fd4b6234f792da9266ac3cf627e248c31d7371a153030080c36c2ed0 | ff24a275fd4b6234f792da9266ac3cf627e248c31d7371a153030080c36c2ed0
-[2024-10-11 23:50:20] addProduct called salma with ff24a275fd4b6234f792da9266ac3cf627e248c31d7371a153030080c36c2ed0 | ff24a275fd4b6234f792da9266ac3cf627e248c31d7371a153030080c36c2ed0 POST: 1
-[2024-10-11 23:50:20] Cookies found in the request: Array
-(
-    [PHPSESSID] => hbnvo0f5toela89l8nbc3jmbk4c8f1ign7mon6va1c360lq7m0p2ns7shvhsmgf7
-)
-
-[2024-10-11 23:50:20] Product does not exist, insert a new row
-[2024-10-11 23:50:20] INSERT INTO products 6281101542741, اكسلنس كلانكس, 1, 6281101542741.jpg, 3, مناديل اكسلنس ١٨٠, 1, الشركة السعودية لتحويل الورق, shelf Z level 2
-[2024-10-11 23:50:20] Product added successfully.
-[2024-10-11 23:50:20] add_product_movement
-[2024-10-11 23:50:20] 6 , 3, in, 1
-[2024-10-11 23:50:20] getProductByBarcode okhttp3.RequestBody$2@8c8d2f6, ff24a275fd4b6234f792da9266ac3cf627e248c31d7371a153030080c36c2ed0 | ff24a275fd4b6234f792da9266ac3cf627e248c31d7371a153030080c36c2ed0
-[2024-10-11 23:50:22] getProductList....
-[2024-10-11 23:50:22] getProductList....start from row#:  0
-[2024-10-11 23:50:22] the size of products is : 5
-[2024-10-11 23:59:49] Login salma From  Device Mobile android ed2359512e8d5d67bbac53b30fc79010a51c969b4c784198dff825abcfa596ce
-[2024-10-11 23:59:50] getProductList....
-[2024-10-11 23:59:50] getProductList....start from row#:  0
-[2024-10-11 23:59:50] the size of products is : 5
+[2024-10-12 00:16:58] Data to warehouse:  Dammam WH-1 => 2
+[2024-10-12 00:16:58] Product does not exist, insert a new row
+[2024-10-12 00:16:58] INSERT INTO products 6291109626237, clear paper, 100, 6291109626237.jpg, 3, clear binding sheet, 2, maxi, home shelf 2 level 2
+[2024-10-12 00:16:58] Product added successfully.
+[2024-10-12 00:16:58] add_product_movement
+[2024-10-12 00:16:58] 8 , 3, in, 100
+[2024-10-12 00:16:58] getProductByBarcode okhttp3.RequestBody$2@9a0cb1f, 0308005d77fa247481b22ac68379783fcaaa1243bbe18966d6a1a3e097911485 | 0308005d77fa247481b22ac68379783fcaaa1243bbe18966d6a1a3e097911485
+[2024-10-12 00:16:59] getProductList....
+[2024-10-12 00:16:59] getProductList....start from row#:  0
+[2024-10-12 00:16:59] the size of products is : 7
+[2024-10-12 00:19:28] getProductList....
+[2024-10-12 00:19:28] getProductList....start from row#:  0
+[2024-10-12 00:19:28] the size of products is : 7
+[2024-10-12 00:19:43] getProductList....
+[2024-10-12 00:19:43] getProductList....start from row#:  0
+[2024-10-12 00:19:43] the size of products is : 7
