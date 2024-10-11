@@ -40,3 +40,10 @@
 [2024-10-12 00:19:43] getProductList....
 [2024-10-12 00:19:43] getProductList....start from row#:  0
 [2024-10-12 00:19:43] the size of products is : 7
+[2024-10-12 00:22:19] Login salma From  Device Mobile android 281b8d2424eaa207f1f5ad8aa19d9d77f81902c6190b0190eb1eababcb1cf3a3
+[2024-10-12 00:22:20] getProductList....
+[2024-10-12 00:22:20] getProductList....start from row#:  0
+[2024-10-12 00:22:20] the size of products is : 7
+[2024-10-12 00:22:53] getProductList....
+[2024-10-12 00:22:53] getProductList....start from row#:  0
+[2024-10-12 00:22:53] the size of products is : 7
