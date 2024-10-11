@@ -262,16 +262,17 @@ class AddFragment : Fragment() {
 
                     if (response.isSuccessful) {
                         // Handle successful response
-                        response.body()?.let { response ->
-                            if (response.status == "success") {
+                            response.body()?.let { responseBody ->
+                            if (responseBody.status == "success") {
                                 Toast.makeText(requireContext(), "The Product Saved Successfully", Toast.LENGTH_LONG).show()
                                 // Optionally clear the form after a successful save
-                            } else {
-                                Toast.makeText(requireContext(), response.message, Toast.LENGTH_LONG).show()
+
+
                             }
+                                Toast.makeText(requireContext(), responseBody.message, Toast.LENGTH_LONG).show()
                         }
 
-                        //call scanbarcode agin to update
+                        //call scan barcode to update
                         try {
                             getProduct(barcode.toString())
                         }catch (e: Exception){
@@ -288,7 +289,7 @@ class AddFragment : Fragment() {
                 override fun onFailure(call: Call<AddProductDataClass>, t: Throwable) {
                     loadingDialog.dismiss() // Dismiss loading dialog
                     Log.e(TAG, "Connection failed: ${t.message}")
-                    //call scanbarcode agin to update
+                    //call scan barcode  to update
                     try {
                         getProduct(barcode.toString())
                     }catch (e: Exception){

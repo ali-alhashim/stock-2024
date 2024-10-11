@@ -47,3 +47,37 @@
 [2024-10-12 00:22:53] getProductList....
 [2024-10-12 00:22:53] getProductList....start from row#:  0
 [2024-10-12 00:22:53] the size of products is : 7
+[2024-10-12 00:37:14] Login admin From  Device Mobile android 75f6f0779567d148a2189de9b6cae7678899daf7a67ff5594d0c9ab3211b5dea
+[2024-10-12 00:37:22] getProductByBarcode 522035000034, 75f6f0779567d148a2189de9b6cae7678899daf7a67ff5594d0c9ab3211b5dea | 75f6f0779567d148a2189de9b6cae7678899daf7a67ff5594d0c9ab3211b5dea
+[2024-10-12 00:37:27] getProductByBarcode 1211617000034, 75f6f0779567d148a2189de9b6cae7678899daf7a67ff5594d0c9ab3211b5dea | 75f6f0779567d148a2189de9b6cae7678899daf7a67ff5594d0c9ab3211b5dea
+[2024-10-12 00:37:30] getProductByBarcode 6281035000034, 75f6f0779567d148a2189de9b6cae7678899daf7a67ff5594d0c9ab3211b5dea | 75f6f0779567d148a2189de9b6cae7678899daf7a67ff5594d0c9ab3211b5dea
+[2024-10-12 00:37:43] addProduct called admin with 75f6f0779567d148a2189de9b6cae7678899daf7a67ff5594d0c9ab3211b5dea | 75f6f0779567d148a2189de9b6cae7678899daf7a67ff5594d0c9ab3211b5dea POST: 1
+[2024-10-12 00:37:43] Cookies found in the request: Array
+(
+    [PHPSESSID] => ul34qbevv8tcejll62vkfl4ahbob380ge8pcce4h6gotioflm6q6878nfl799jaq
+)
+
+[2024-10-12 00:37:43] Data to warehouse:  Home => 3
+[2024-10-12 00:37:43] Product stock updated successfully.
+[2024-10-12 00:37:43] add_product_movement
+[2024-10-12 00:37:43] 7 , 1, out, -1
+[2024-10-12 00:37:43] getProductByBarcode okhttp3.RequestBody$2@8e0d196, 75f6f0779567d148a2189de9b6cae7678899daf7a67ff5594d0c9ab3211b5dea | 75f6f0779567d148a2189de9b6cae7678899daf7a67ff5594d0c9ab3211b5dea
+[2024-10-12 00:37:49] getProductList....
+[2024-10-12 00:37:49] getProductList....start from row#:  0
+[2024-10-12 00:37:49] the size of products is : 7
+[2024-10-12 00:42:56] Login admin From  Device Mobile android be98343df603835a4ceb307e64f3b08681212e73c4ad28cb2ea7782e4156f0c8
+[2024-10-12 00:42:59] getProductByBarcode 6281035000034, be98343df603835a4ceb307e64f3b08681212e73c4ad28cb2ea7782e4156f0c8 | be98343df603835a4ceb307e64f3b08681212e73c4ad28cb2ea7782e4156f0c8
+[2024-10-12 00:43:04] addProduct called admin with be98343df603835a4ceb307e64f3b08681212e73c4ad28cb2ea7782e4156f0c8 | be98343df603835a4ceb307e64f3b08681212e73c4ad28cb2ea7782e4156f0c8 POST: 1
+[2024-10-12 00:43:04] Cookies found in the request: Array
+(
+    [PHPSESSID] => 927rt7mbo8hc4d63jqvse8asq96rchh8ptrqbskut1hkqudvlc6m5meh3hvdqmle
+)
+
+[2024-10-12 00:43:04] Data to warehouse:  Default Warehouse => 1
+[2024-10-12 00:43:04] Product stock updated successfully.
+[2024-10-12 00:43:04] add_product_movement
+[2024-10-12 00:43:04] 7 , 1, in, 1
+[2024-10-12 00:43:04] getProductByBarcode okhttp3.RequestBody$2@922c8c, be98343df603835a4ceb307e64f3b08681212e73c4ad28cb2ea7782e4156f0c8 | be98343df603835a4ceb307e64f3b08681212e73c4ad28cb2ea7782e4156f0c8
+[2024-10-12 00:43:09] getProductList....
+[2024-10-12 00:43:09] getProductList....start from row#:  0
+[2024-10-12 00:43:09] the size of products is : 7

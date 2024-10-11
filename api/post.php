@@ -217,7 +217,7 @@ function addProduct($data, $conn)
             $response['status'] = '400';
 
             logToFile("400 Bad Request. Missing required fields.");
-
+            header('Content-Type: application/json');
             echo json_encode($response);
             return;
         }
@@ -226,7 +226,8 @@ function addProduct($data, $conn)
         $uploadDir = __DIR__ . '/../static/img/uploads/';
         $imagePath = null;
         
-        if ($image && $image['error'] == 0) {
+        if ($image && $image['error'] == 0) 
+        {
             $imageName = basename($image['name']);
             $targetFile = $uploadDir . $imageName;
             $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
@@ -242,6 +243,7 @@ function addProduct($data, $conn)
                     $response['status'] = '500';
 
                     logToFile("500 Internal Server Error. Failed to upload image.");
+                    header('Content-Type: application/json');
                     echo json_encode($response);
                     return;
                 }
@@ -250,10 +252,13 @@ function addProduct($data, $conn)
                 $response['status'] = '400';
 
                 logToFile("400 Bad Request. Invalid image type.");
+                header('Content-Type: application/json');
                 echo json_encode($response);
                 return;
             }
         }
+
+
 
         // Check if the product already exists
         $stmt = $conn->prepare("SELECT stock FROM products WHERE barcode = ?");
@@ -280,10 +285,20 @@ function addProduct($data, $conn)
 
                 add_product_movement($conn, $barcode, $_SESSION['user_id'], $quantity);
 
+                header('Content-Type: application/json');
+                echo json_encode($response);
+                return;
+
+                //********************** here you  success update quantity of product*/
+
             } else {
                 $response["message"] = "500 Internal Server Error. Failed to update stock.";
                 $response["status"] = "500";
                 logToFile("500 Internal Server Error. Failed to update stock.");
+
+                header('Content-Type: application/json');
+                echo json_encode($response);
+                return;
             }
             $updateStmt->close();
         } else {
@@ -302,10 +317,21 @@ function addProduct($data, $conn)
                 $response["status"] = "success";
                 logToFile("Product added successfully.");
                 add_product_movement($conn, $barcode, $_SESSION['user_id'], $quantity);
+
+                header('Content-Type: application/json');
+                echo json_encode($response);
+                return;
+
+                //********************** here you  success insert new product*/
+
             } else {
                 $response["message"] = "500 Internal Server Error. Failed to insert new product.";
                 $response["status"] = "500";
                 logToFile("500 Internal Server Error. Failed to insert new product.");
+
+                header('Content-Type: application/json');
+                echo json_encode($response);
+                return;
             }
             $insertStmt->close();
         }
@@ -315,11 +341,12 @@ function addProduct($data, $conn)
         $response["message"] = "403 Forbidden. Invalid token, login required.";
         $response["status"] = "403";
         logToFile("403 Forbidden. Invalid token, login required.");
+        header('Content-Type: application/json');
+        echo json_encode($response);
+        return;
     }
 
-    // Return response as JSON
-    header('Content-Type: application/json');
-    echo json_encode($response);
+    
 }
 
 
