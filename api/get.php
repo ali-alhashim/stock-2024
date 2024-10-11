@@ -31,6 +31,10 @@ if($_SERVER['REQUEST_METHOD'] == 'GET')
   {
     getProductByBarcode($conn, $_GET);
   }
+  elseif($function =="getProductList")
+  {
+     getProductList($conn, $_GET);
+  }
 }
 
 
@@ -87,6 +91,7 @@ function getProductByBarcode($conn, $data)
   else
   {
     // you have to login first message
+    logToFile("getProductByBarcode you have to login first message");
     header('Content-Type: application/json');
     echo json_encode(['status' => 'error', 'message' => 'Login First!']);
 
@@ -94,6 +99,45 @@ function getProductByBarcode($conn, $data)
 
    
 
+
+} //end get product by barcode
+
+function getProductList($conn, $data)
+{
+  logToFile("getProductList....");
+  $token   = isset($data['token'])    ? trim($data['token']) : '';
+
+  if ($token == $_SESSION['token']) 
+  {
+    //if page =0 get first 10 product if 2 get the next 10 product as so ...
+    $page   = isset($data['page'])    ? trim($data['page']) : 0;
+
+   
+    $startFrom = intval($page) * 10;
+    
+
+    logToFile("getProductList....start from row#:  $startFrom");
+    $stmt = $conn->prepare("SELECT *  FROM products limit 10 OFFSET ?");
+    $stmt->bind_param("i", $startFrom); // Bind offset as integer
+    $stmt->execute();
+    $result = $stmt->get_result();
+     // Fetch all results as an associative array
+    $products = $result->fetch_all(MYSQLI_ASSOC);
+    // Send the JSON response
+    $productCount = count($products);
+    logToFile("the size of products is : $productCount");
+    header('Content-Type: application/json');
+    echo json_encode(['status' => 'success', 'products' => $products]);
+
+  }
+  else
+  {
+     // you have to login first message
+     logToFile("getProductList you have to login first message");
+     header('Content-Type: application/json');
+     echo json_encode(['status' => 'error', 'message' => 'Login First!']);
+
+  }
 
 }
 

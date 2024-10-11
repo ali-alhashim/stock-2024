@@ -197,3 +197,50 @@
 [2024-10-09 20:58:45] 5 , 3, in, 20
 [2024-10-09 20:58:45] getProductByBarcode okhttp3.RequestBody$2@b4bc444, 0b5ef380e737a3c50da747da6bb7be50aaa6d7257a00b645bf00dcb29650cf9e | 0b5ef380e737a3c50da747da6bb7be50aaa6d7257a00b645bf00dcb29650cf9e
 [2024-10-11 13:00:23] Login salma From  Device Mobile android f5ea3b5faa7186d7845dfb66cc8ed07db2031709c2acc9f490a24ae06f54a577
+[2024-10-11 23:07:25] Login salma From  Device Mobile android 59c230f1eae5ccdaaa21771f4ed5f7e752d50b720b498143b3cb0e50d9d7aecb
+[2024-10-11 23:07:27] getProductList....
+[2024-10-11 23:07:27] getProductList....start from row#:  0
+[2024-10-11 23:08:21] getProductList....
+[2024-10-11 23:08:21] getProductList....start from row#:  0
+[2024-10-11 23:13:32] getProductList....
+[2024-10-11 23:13:32] getProductList you have to login first message
+[2024-10-11 23:13:40] Login salma From  Device Mobile android a86737b5cc83f46b62e3f7178042ca961a78b807d6a4a358fded5f77649697f4
+[2024-10-11 23:13:41] getProductList....
+[2024-10-11 23:13:41] getProductList....start from row#:  0
+[2024-10-11 23:13:52] getProductList....
+[2024-10-11 23:13:52] getProductList....start from row#:  0
+[2024-10-11 23:18:15] Login salma From  Device Mobile android 211bd9d527023b98d1e8ec38409a6b596f96efc4b3903dee9c4316d40bc2f1b0
+[2024-10-11 23:18:17] getProductList....
+[2024-10-11 23:18:17] getProductList....start from row#:  0
+[2024-10-11 23:20:15] getProductList....
+[2024-10-11 23:20:15] getProductList....start from row#:  0
+[2024-10-11 23:20:15] the size of products is : 4
+[2024-10-11 23:24:11] Login salma From  Device Mobile android 4bd662b5bbc15126a9fa34291b61fb9f74f70a8b0330105eb98ad1658449b692
+[2024-10-11 23:24:12] getProductList....
+[2024-10-11 23:24:12] getProductList....start from row#:  0
+[2024-10-11 23:24:12] the size of products is : 4
+[2024-10-11 23:24:44] getProductList....
+[2024-10-11 23:24:44] getProductList....start from row#:  0
+[2024-10-11 23:24:44] the size of products is : 4
+[2024-10-11 23:26:47] Login salma From  Device Mobile android dd8c728835b3511441ad340aa66b2164ee8c73b10a78843c73ce6354ec3b6c61
+[2024-10-11 23:26:48] getProductList....
+[2024-10-11 23:26:48] getProductList....start from row#:  0
+[2024-10-11 23:26:48] the size of products is : 4
+[2024-10-11 23:27:02] getProductList....
+[2024-10-11 23:27:02] getProductList....start from row#:  0
+[2024-10-11 23:27:02] the size of products is : 4
+[2024-10-11 23:28:34] getProductList....
+[2024-10-11 23:28:34] getProductList....start from row#:  0
+[2024-10-11 23:28:34] the size of products is : 4
+[2024-10-11 23:38:50] Login salma From  Device Mobile android 9d8a7dc6eed6b52cd8efd5fef4374f1fba7dcfdc0f79f10af9ca6ef8980d452b
+[2024-10-11 23:38:51] getProductList....
+[2024-10-11 23:38:51] getProductList....start from row#:  0
+[2024-10-11 23:38:51] the size of products is : 4
+[2024-10-11 23:41:06] Login salma From  Device Mobile android c164459a279eab845732fbb8c5dd05a1e0033494b6f5a8facb0e85c1028a7287
+[2024-10-11 23:41:08] getProductList....
+[2024-10-11 23:41:08] getProductList....start from row#:  0
+[2024-10-11 23:41:08] the size of products is : 4
+[2024-10-11 23:46:35] Login salma From  Device Mobile android ff24a275fd4b6234f792da9266ac3cf627e248c31d7371a153030080c36c2ed0
+[2024-10-11 23:46:36] getProductList....
+[2024-10-11 23:46:36] getProductList....start from row#:  0
+[2024-10-11 23:46:36] the size of products is : 4
