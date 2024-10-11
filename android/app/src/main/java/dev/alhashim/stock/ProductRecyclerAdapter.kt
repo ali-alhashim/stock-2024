@@ -40,6 +40,6 @@ class ProductRecyclerAdapter(private val context: Context,private val productLis
         holder.description.text = currentProduct.description
         holder.location.text    = currentProduct.location
         holder.quantity.text    = currentProduct.stock
-        holder.warehouse.text   = currentProduct.warehouse_id.toString()
+        holder.warehouse.text   = currentProduct.warehouse
     }
 }

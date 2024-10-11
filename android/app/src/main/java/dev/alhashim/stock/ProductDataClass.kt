@@ -12,6 +12,7 @@ data class ProductDataClass(
     val location:String,
     val image:String,
     val warehouse_id:Int,
+    val warehouse:String,
     val cost_price:String,
     val sale_price:String,
     val created_by_id:Int,

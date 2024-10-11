@@ -117,7 +117,10 @@ function getProductList($conn, $data)
     
 
     logToFile("getProductList....start from row#:  $startFrom");
-    $stmt = $conn->prepare("SELECT *  FROM products limit 10 OFFSET ?");
+    $stmt = $conn->prepare("SELECT PRODUCT.*, WH.name AS warehouse
+                            FROM stockdb.products PRODUCT
+                            JOIN stockdb.warehouse WH ON WH.id = PRODUCT.warehouse_id
+                            LIMIT 10 OFFSET ?;");
     $stmt->bind_param("i", $startFrom); // Bind offset as integer
     $stmt->execute();
     $result = $stmt->get_result();

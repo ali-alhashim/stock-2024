@@ -244,3 +244,23 @@
 [2024-10-11 23:46:36] getProductList....
 [2024-10-11 23:46:36] getProductList....start from row#:  0
 [2024-10-11 23:46:36] the size of products is : 4
+[2024-10-11 23:48:11] getProductByBarcode 6281101542741, ff24a275fd4b6234f792da9266ac3cf627e248c31d7371a153030080c36c2ed0 | ff24a275fd4b6234f792da9266ac3cf627e248c31d7371a153030080c36c2ed0
+[2024-10-11 23:50:20] addProduct called salma with ff24a275fd4b6234f792da9266ac3cf627e248c31d7371a153030080c36c2ed0 | ff24a275fd4b6234f792da9266ac3cf627e248c31d7371a153030080c36c2ed0 POST: 1
+[2024-10-11 23:50:20] Cookies found in the request: Array
+(
+    [PHPSESSID] => hbnvo0f5toela89l8nbc3jmbk4c8f1ign7mon6va1c360lq7m0p2ns7shvhsmgf7
+)
+
+[2024-10-11 23:50:20] Product does not exist, insert a new row
+[2024-10-11 23:50:20] INSERT INTO products 6281101542741, اكسلنس كلانكس, 1, 6281101542741.jpg, 3, مناديل اكسلنس ١٨٠, 1, الشركة السعودية لتحويل الورق, shelf Z level 2
+[2024-10-11 23:50:20] Product added successfully.
+[2024-10-11 23:50:20] add_product_movement
+[2024-10-11 23:50:20] 6 , 3, in, 1
+[2024-10-11 23:50:20] getProductByBarcode okhttp3.RequestBody$2@8c8d2f6, ff24a275fd4b6234f792da9266ac3cf627e248c31d7371a153030080c36c2ed0 | ff24a275fd4b6234f792da9266ac3cf627e248c31d7371a153030080c36c2ed0
+[2024-10-11 23:50:22] getProductList....
+[2024-10-11 23:50:22] getProductList....start from row#:  0
+[2024-10-11 23:50:22] the size of products is : 5
+[2024-10-11 23:59:49] Login salma From  Device Mobile android ed2359512e8d5d67bbac53b30fc79010a51c969b4c784198dff825abcfa596ce
+[2024-10-11 23:59:50] getProductList....
+[2024-10-11 23:59:50] getProductList....start from row#:  0
+[2024-10-11 23:59:50] the size of products is : 5
