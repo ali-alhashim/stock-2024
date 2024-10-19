@@ -38,7 +38,10 @@
               <h5>Welcome to Inventory System</h5>
               <div class="row my-5">
                 <div class="col">
+                   <a href="android/app/build/outputs/apk/debug/app-debug.apk">
                   <img src="static/img/google.png" width="200"/>
+                   </a>
+
                 </div>
                 <div class="col">
                   <img src="static/img/apple.png" width="200"/>
