@@ -19,6 +19,6 @@
 - Delete the config.php file from admin/base/config.php.
 - In your browser, open https://your-server/folder-of-application/setup/.
 - Enter your information, and you're ready to go.
-- Download Android app apk from login page set api url example https://alhashim.dev/stock/api
+- Download Android app apk from login page set api url example https://alhashim.dev/stock/
 - login from the app the items you scan and you saved will be in your server 
 - android used retrofit & google ML for Scanning Barcode QR code

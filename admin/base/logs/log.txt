@@ -148,3 +148,32 @@
 [2024-10-25 13:41:47] add_product_movement
 [2024-10-25 13:41:47] 6 , 1, in, 1
 [2024-10-25 13:41:47] return response data {"message":"Product stock updated successfully.","status":"success"}
+[2024-10-25 13:45:35] Login admin From  Device Mobile android 00b0910510b601df9a70b5d17352b5594bc82b4112d99d9e5699e6a712fb6141
+[2024-10-25 13:45:40] getProductByBarcode 6281101542741, 00b0910510b601df9a70b5d17352b5594bc82b4112d99d9e5699e6a712fb6141 | 00b0910510b601df9a70b5d17352b5594bc82b4112d99d9e5699e6a712fb6141
+[2024-10-25 13:45:43] addProduct called admin with 00b0910510b601df9a70b5d17352b5594bc82b4112d99d9e5699e6a712fb6141 | 00b0910510b601df9a70b5d17352b5594bc82b4112d99d9e5699e6a712fb6141 POST: Array
+(
+    [username] => admin
+    [function] => addProduct
+    [device] => android
+    [token] => 00b0910510b601df9a70b5d17352b5594bc82b4112d99d9e5699e6a712fb6141
+    [name] => اكسلنس كلانكس
+    [newStock] => 10
+    [description] => مناديل اكسلنس ١٨٠
+    [manufacture] => الشركة السعودية لتحويل الورق
+    [location] => shelf Z level 2
+    [warehouse_id] => Default Warehouse
+    [barcode] => 6281101542741
+    [quantity] => 1
+)
+
+[2024-10-25 13:45:43] Cookies found in the request: Array
+(
+    [PHPSESSID] => 6252g0bf5o0vmi4m67jf7dch904v2fnpgfr8ou9fo208iujcimpu3n26okbjehkv
+)
+
+[2024-10-25 13:45:43] Data to warehouse:  Default Warehouse => 1
+[2024-10-25 13:45:43] Initialize response data Array
+[2024-10-25 13:45:43] Product stock updated successfully.
+[2024-10-25 13:45:43] add_product_movement
+[2024-10-25 13:45:43] 6 , 1, in, 1
+[2024-10-25 13:45:43] return response data {"message":"Product stock updated successfully.","status":"success"}
