@@ -1,5 +1,5 @@
 <?php
-
+error_reporting(0); // Only during debugging =1
 ini_set('session.hash_function', 'sha256');
 ini_set('session.sid_length', 64);  // 256 characters long
   
@@ -195,7 +195,8 @@ function addProduct($data, $conn)
     $barcode  = isset($data['barcode'])  ? trim($data['barcode']) : '';
     $image    = isset($_FILES['image'])  ? $_FILES['image'] : null;
 
-    logToFile("addProduct called ".$username . " with " . $token . " | ".$_SESSION['token']. " POST: ".print_r($data));
+    logToFile("addProduct called ".$username . " with " . $token . " | ".$_SESSION['token']. " POST: ".print_r($data, true));
+
     logToFile("Cookies found in the request: " . print_r($_COOKIE, true));
 
     $warehouseID = getWarehouseIDByName($conn, $warehouseName);
@@ -205,8 +206,9 @@ function addProduct($data, $conn)
     // Initialize response data
     $response = [
         'message' => '',
-        'status' => '',
+        'status' => ''
     ];
+    logToFile("Initialize response data ". $response);
 
     // Check if the token is valid
     if ($token == $_SESSION['token']) {
@@ -218,8 +220,10 @@ function addProduct($data, $conn)
 
             logToFile("400 Bad Request. Missing required fields.");
             header('Content-Type: application/json');
+
+            logToFile("return response data ". json_encode($response));
             echo json_encode($response);
-            return;
+            exit;
         }
 
         // Handle file upload
@@ -244,8 +248,10 @@ function addProduct($data, $conn)
 
                     logToFile("500 Internal Server Error. Failed to upload image.");
                     header('Content-Type: application/json');
+
+                    logToFile("return response data ". json_encode($response));
                     echo json_encode($response);
-                    return;
+                    exit;
                 }
             } else {
                 $response['message'] = "400 Bad Request. Invalid image type.";
@@ -253,8 +259,10 @@ function addProduct($data, $conn)
 
                 logToFile("400 Bad Request. Invalid image type.");
                 header('Content-Type: application/json');
+
+                logToFile("return response data ". json_encode($response));
                 echo json_encode($response);
-                return;
+                exit;
             }
         }
 
@@ -286,8 +294,9 @@ function addProduct($data, $conn)
                 add_product_movement($conn, $barcode, $_SESSION['user_id'], $quantity);
 
                 header('Content-Type: application/json');
+                logToFile("return response data ". json_encode($response));
                 echo json_encode($response);
-                return;
+                exit;
 
                 //********************** here you  success update quantity of product*/
 
@@ -297,8 +306,10 @@ function addProduct($data, $conn)
                 logToFile("500 Internal Server Error. Failed to update stock.");
 
                 header('Content-Type: application/json');
+
+                logToFile("return response data ". json_encode($response));
                 echo json_encode($response);
-                return;
+                exit;
             }
             $updateStmt->close();
         } else {
@@ -319,8 +330,9 @@ function addProduct($data, $conn)
                 add_product_movement($conn, $barcode, $_SESSION['user_id'], $quantity);
 
                 header('Content-Type: application/json');
+                logToFile("return response data ". json_encode($response));
                 echo json_encode($response);
-                return;
+                exit;
 
                 //********************** here you  success insert new product*/
 
@@ -330,8 +342,9 @@ function addProduct($data, $conn)
                 logToFile("500 Internal Server Error. Failed to insert new product.");
 
                 header('Content-Type: application/json');
+                logToFile("return response data ". json_encode($response));
                 echo json_encode($response);
-                return;
+                exit;
             }
             $insertStmt->close();
         }
@@ -342,8 +355,9 @@ function addProduct($data, $conn)
         $response["status"] = "403";
         logToFile("403 Forbidden. Invalid token, login required.");
         header('Content-Type: application/json');
+        logToFile("return response data ". json_encode($response));
         echo json_encode($response);
-        return;
+        exit;
     }
 
     

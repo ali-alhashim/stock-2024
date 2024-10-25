@@ -258,30 +258,28 @@ class AddFragment : Fragment() {
             call.enqueue(object : Callback<AddProductDataClass> {
                 override fun onResponse(call: Call<AddProductDataClass>, response: Response<AddProductDataClass>) {
                     loadingDialog.dismiss() // Dismiss loading dialog
-                    Log.d(TAG, "Raw response: ${response.raw().toString()}")
+                    Log.d(TAG, "Raw response: ${response.raw()}")
+                    Log.e(TAG, "Response isSuccessful: ${response.isSuccessful}")
 
                     if (response.isSuccessful) {
-                        // Handle successful response
-                            response.body()?.let { responseBody ->
-                            if (responseBody.status == "success") {
-                                Toast.makeText(requireContext(), "The Product Saved Successfully", Toast.LENGTH_LONG).show()
-                                // Optionally clear the form after a successful save
-
-
-                            }
-                                Toast.makeText(requireContext(), responseBody.message, Toast.LENGTH_LONG).show()
-                        }
-
-                        //call scan barcode to update
                         try {
-                            getProduct(barcode.toString())
-                        }catch (e: Exception){
-                            Toast.makeText(requireContext(), "Product:${e.toString()}", Toast.LENGTH_SHORT).show()
-                        }
+                            response.body()?.let { responseBody ->
+                                Log.e(TAG, "Add Product Response: ${responseBody.status}")
 
-                    }
-                    else {
-                        Log.e(TAG, "Saving product failed. HTTP error code: ${response.body()?.message}")
+                                if (responseBody.status == "success") {
+                                    Toast.makeText(requireContext(), "The Product Saved Successfully", Toast.LENGTH_LONG).show()
+                                    // Optionally clear the form after a successful save
+                                }
+                            } ?: run {
+                                Log.e(TAG, "Response body is null")
+                                Toast.makeText(requireContext(), "Unexpected response format", Toast.LENGTH_LONG).show()
+                            }
+                        } catch (e: Exception) {
+                            Log.e(TAG, "Error parsing response: ${e.message}")
+                            Toast.makeText(requireContext(), "Parsing error: ${e.message}", Toast.LENGTH_LONG).show()
+                        }
+                    } else {
+                        Log.e(TAG, "Saving product failed. HTTP error code: ${response.code()}")
                         Toast.makeText(requireContext(), "Saving product failed. Error code: ${response.code()}", Toast.LENGTH_LONG).show()
                     }
                 }
@@ -290,11 +288,7 @@ class AddFragment : Fragment() {
                     loadingDialog.dismiss() // Dismiss loading dialog
                     Log.e(TAG, "Connection failed: ${t.message}")
                     //call scan barcode  to update
-                    try {
-                        getProduct(barcode.toString())
-                    }catch (e: Exception){
-                        Toast.makeText(requireContext(), "Product:${e.toString()}", Toast.LENGTH_SHORT).show()
-                    }
+
 
                     Toast.makeText(requireContext(), "Failed to connect to server. Check URL and try again. ${t.message}", Toast.LENGTH_LONG).show()
 
